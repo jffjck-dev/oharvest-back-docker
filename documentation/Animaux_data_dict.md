@@ -1,0 +1,12 @@
+- nom
+- sexe
+- date naissance
+- date décès
+- code espèce
+- libellé
+- num. enclos
+- date début
+- date fin
+- nb. max. commensaux
+- num. enclos
+- nb. max. congénères
