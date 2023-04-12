@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 
-const cors = require('cors');
+import cors from 'cors';
 
-const mainRouter = require('./routers/main.router');
+import mainRouter from './routers/main.router.js';
+import { apiRouter } from './routers/api/router.js';
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -14,5 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(mainRouter);
+app.use('/api', apiRouter);
 
-module.exports = app;
+
+export default app;
