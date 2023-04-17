@@ -2,7 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION "variety_select", "product_select", "category_select", "plot_select";
-DROP TYPE "product_packed", "variety_packed";
+DROP VIEW "variety_select", "product_select", "category_select", "plot_select";
 
 COMMIT;

@@ -4,3 +4,4 @@ node_modules
 .vscode
 sqitch.conf
 migrations/sqitch.plan
+dev_sqitch_script.sh

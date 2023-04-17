@@ -1,7 +1,5 @@
-import pool from '../../services/pgClient.js';
-import { Product } from '../../models/Product.js';
-
-const productDataMapper = new Product(pool);
+import { productDataMapper } from '../../models/Product.js';
+import { APIError } from '../../services/error/APIError.js';
 
 export const productController = {
     /**
@@ -9,17 +7,57 @@ export const productController = {
      * @param {Request} request 
      * @param {Response} response 
      */
-    allProduct: async function (request, response) {
-        const product = await productDataMapper.findAll();
+    allProduct: async function (request, response, next) {
+        try {
+            const products = await productDataMapper.findAll();
 
-        response.json( product );
+            response.json( products );
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
     },
 
     oneProduct: async function (request, response) {
-        const id = request.params.id;
-
-        const oneProduct = await productDataMapper.findOne(id);
+        const oneProduct = request.instance;
 
         response.json( oneProduct );
+    },
+
+    createProduct: async function (request, response, next) {
+        try {
+            const createProduct = await productDataMapper.create(request.body);
+
+            response.json( createProduct );
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
+    },
+
+    updateProduct: async function (request, response, next) {
+        const productFound = request.instance;
+
+        const updatedProduct = {...productFound, ...request.body};
+
+        try {
+            const result = await productDataMapper.update(updatedProduct);
+
+            response.json( result );
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
+    },
+
+    allProductAvailable: async function (request, response, next) {
+        try {
+            const products = await productDataMapper.findAllProductAvailable();
+
+            response.json( products );
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
     },
 };

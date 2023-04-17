@@ -40,11 +40,11 @@ version_file_name=db_version
 
 # Use this variable for development environment to avoid the prompt or comment them if you don't need them
 # Design the user of the sql server who own the database of the project
-db_user=admin_oharvest
+#db_user=
 # Represent the database of the project
-database=oharvest
+#database=
 # The password of the sql user
-db_password=oharvest
+#db_password=
 
 #Allow you to configure which database engine you want to use for your project.
 #Uncomment the one needed
@@ -89,14 +89,15 @@ function help_message {
 # - create a versioning script mandatory for the use of this script or execute it if it exist
 # - delete sqitch.conf and sqitch.plan if exist and create them with new setup
 function command_sqitch_init {
-    read -rp "The admin to connect >> " admin
+    echo "Answer all input to create the administrator and the database :"
+    read -rp "The main administrator to connect who create the following user and database >> " admin
 
     if [ -z ${db_user+x} ]; then
-        read -rp 'Database user >> ' db_user
+        read -rp 'User who will be the admin of the future database >> ' db_user
     fi
 
     if [ -z ${database+x} ]; then
-        read -rp 'Database password >> ' database
+        read -rp 'Database used for this project >> ' database
     fi
 
     dropdb "$database" --if-exists -U "$admin"
@@ -149,11 +150,10 @@ function command_sqitch_action {
     printf "%b" "\a\nSelect a stage to process:\n" >&2
     select file in $file_list; do
         if [ -z ${db_user+x} ]; then
-            read -rp 'Database user : ' db_user
+            read -rp 'User who own the registered database : ' db_user
         fi
         if [ -z ${db_password+x} ]; then
-            read -rsp 'Database password : ' db_password
-            echo "Password registered"
+            read -rsp 'Password : ' db_password
         fi
 
         export PGUSER=$db_user
@@ -174,11 +174,16 @@ function command_sqitch_action {
 # -------------------------------------------------------------------------------#
 # Main Script                                                                         #
 # -------------------------------------------------------------------------------#
+PS3='Action to execute > '
+
 if [ $# -gt 1 ]; then
     echo 'Too many arguments'
     exit 1
 elif [ $# -eq 1 ] && [ "$init_setup" ]; then
     case $1 in
+    -i)
+        command_sqitch_init
+        ;;
     -a)
         command_sqitch_add
         ;;
@@ -193,13 +198,13 @@ elif [ $# -eq 1 ] && [ "$init_setup" ]; then
         ;;
     -h)
         help_message
-        exit 0
         ;;
     *)
         printf "Error: Argument invalid !\n"
         exit 1
         ;;
     esac
+    exit 0
 fi
 
 PS3='Action to execute > '

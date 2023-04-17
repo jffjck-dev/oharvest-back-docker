@@ -1,7 +1,5 @@
-import pool from '../../services/pgClient.js';
-import { Variety } from '../../models/Variety.js';
-
-const varietyDataMapper = new Variety(pool);
+import { varietyDataMapper } from '../../models/Variety.js';
+import { APIError } from '../../services/error/APIError.js';
 
 export const varietyController = {
     /**
@@ -9,17 +7,46 @@ export const varietyController = {
      * @param {Request} request 
      * @param {Response} response 
      */
-    allVariety: async function (request, response) {
-        const varieties = await varietyDataMapper.findAll();
+    allVariety: async function (request, response, next) {
+        try {
+            const varieties = await varietyDataMapper.findAll();
 
-        response.json( varieties );
+            response.json( varieties );   
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
     },
 
     oneVariety: async function (request, response) {
-        const id = request.params.id;
+        const oneVAriety = request.instance;
 
-        const oneVariety = await varietyDataMapper.findOne(id);
+        response.json( oneVAriety );
+    },
 
-        response.json( oneVariety );
+    createVariety: async function (request, response, next) {
+        try {
+            const createVariety = await varietyDataMapper.create(request.body);
+
+            response.json( createVariety );
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
+    },
+
+    updateVariety: async function (request, response, next) {
+        const varietyFound = request.instance;
+
+        const updatedVariety = {...varietyFound, ...request.body};
+
+        try {
+            const result = await varietyDataMapper.update(updatedVariety);
+
+            response.json( result );
+
+        } catch(error) {
+            next(new APIError('Internal server error', 500));
+        }
     },
 };

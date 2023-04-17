@@ -21,4 +21,22 @@ export class CoreDataMapper{
 
         return result.rows[0];
     }
+
+    async create(entity){
+        const query = `SELECT * FROM ${this.tableName}_insert($1)`;
+        const values = [entity];
+
+        const result = await this.client.query(query, values);
+        
+        return result.rows[0];
+    }
+
+    async update(entity){
+        const query = `SELECT * FROM ${this.tableName}_update($1)`;
+        const values = [entity];
+
+        const result = await this.client.query(query, values);
+
+        return result.rows[0];
+    }
 }
