@@ -1,0 +1,26 @@
+<%- include('./partials/header'); %>
+
+<body class="container">
+    <aside>
+        Hello world
+    </aside>
+    <main class="content">
+        <div class="card">
+            <h2 class="card__title">Consulter les produits</h2>
+            <%- include('./components/btn_link', {link: 'products', title: 'Voir la liste des produits', icon: 'mdi-eye-outline'}); %>
+        </div>
+        <div class="card">
+            <h2 class="card__title">Consulter les catégories</h2>
+            <%- include('./components/btn_link', {link: 'categories', title: 'Voir la liste des catégories', icon: 'mdi-eye-outline'}); %>
+        </div>
+        <div class="card">
+            <h2 class="card__title">Consulter les parcelles</h2>
+            <%- include('./components/btn_link', {link: 'plots', title: 'Voir la liste des parcelles', icon: 'mdi-eye-outline'}); %>
+        </div>
+        <div class="card">
+            <h2 class="card__title">Consulter les variétés</h2>
+            <%- include('./components/btn_link', {link: 'varieties', title: 'Voir la liste des variétés', icon: 'mdi-eye-outline'}); %>
+        </div>
+    </main>
+</body>
+</html>

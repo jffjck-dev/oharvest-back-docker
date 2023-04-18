@@ -6,9 +6,9 @@ export const errorHandling = {
      * @param {APIError} error
      * @param {Request} request
      * @param {Response} response
-     * @param _
+     * @param {NextFunction} next
      */
-    manage(error, request, response, _){
+    manage(error, request, response, next){
         switch (error.statusCode) {
         case 400:
             response.status(400).json('Bad request');

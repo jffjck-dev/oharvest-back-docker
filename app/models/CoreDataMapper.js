@@ -6,7 +6,7 @@ export class CoreDataMapper{
     }
 
     async findAll(){
-        const query = `SELECT * FROM ${this.tableName}_select`;
+        const query = `SELECT * FROM ${this.tableName}_select ORDER BY id ASC`;
 
         const result = await this.client.query(query);
 
@@ -33,6 +33,15 @@ export class CoreDataMapper{
 
     async update(entity){
         const query = `SELECT * FROM ${this.tableName}_update($1)`;
+        const values = [entity];
+
+        const result = await this.client.query(query, values);
+
+        return result.rows[0];
+    }
+
+    async delete(entity){
+        const query = `SELECT * FROM ${this.tableName}_delete($1)`;
         const values = [entity];
 
         const result = await this.client.query(query, values);

@@ -8,7 +8,7 @@ export const plotMiddleware = {
      * Otherwise, send an error with status 400.
      * @param {Request} request
      * @param {Response} response
-     * @param {next} next
+     * @param {NextFunction} next
      * @param {Number} id Id of a plot
      */
     async loadPlot(request, response, next, id){
@@ -23,7 +23,7 @@ export const plotMiddleware = {
             }
 
         } catch(error){
-            next(new APIError('Server error', 500));
+            next(new APIError('Internal server error', 500));
         }       
     }
 };

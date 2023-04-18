@@ -8,7 +8,7 @@ export const categoryMiddleware = {
     * Otherwise, send an error with status 400.
     * @param {Request} request 
     * @param {Response} response 
-    * @param {next} next 
+    * @param {NextFunction} next
     * @param {Number} id Id of a category
     */
     async loadCategory(request, response, next, id){

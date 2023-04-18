@@ -33,28 +33,28 @@ ALTER TABLE product_in_plot
 CREATE OR REPLACE FUNCTION category_delete(pp json) RETURNS category AS $$
     DELETE  
     FROM category c
-    WHERE c.id=(pp->>'categoryId')::int
+    WHERE c.id=(pp->>'id')::int
     RETURNING *;
 $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION plot_delete(pp json) RETURNS plot AS $$
     DELETE  
     FROM plot pl
-    WHERE pl.id=(pp->>'plotId')::int 
+    WHERE pl.id=(pp->>'id')::int
     RETURNING *;
 $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION product_delete(pp json) RETURNS product AS $$
     DELETE  
     FROM product pr
-    WHERE pr.id=(pp->>'productId')::int
+    WHERE pr.id=(pp->>'id')::int
     RETURNING *;
 $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION variety_delete(pp json) RETURNS variety AS $$
     DELETE  
     FROM variety v
-    WHERE v.id=(pp->>'varietyId')::int
+    WHERE v.id=(pp->>'id')::int
     RETURNING *;
 $$ LANGUAGE SQL;
 

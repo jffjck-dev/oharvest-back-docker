@@ -1,0 +1,10 @@
+<% const classAttribute = (typeof className !== 'undefined')  ? ` ${className}` : '' %>
+
+<a href="/admin/<%= link %>" class="button<%= classAttribute %>">
+    <span class="icon-text">
+        <span class="icon">
+            <i class="mdi <%= icon %>"></i>
+        </span>
+        <span><%= title %></span>
+    </span>
+</a>
