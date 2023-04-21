@@ -1,0 +1,36 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+    <aside>
+        <a href="/admin">Home</a>
+        Catégories
+    </aside>
+    <main class="content">
+        <h1>Detail d'une variété</h1>
+        <form action="<%= actionLink %>">
+            <div class="field">
+                <label class="label">Nom</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" placeholder="Nom de la variété" value="<%= variety.name %>" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea" name="description" id="description" cols="30" rows="10" placeholder="Description de la variété" disabled><%= variety.description %></textarea>
+                </div>
+            </div>
+            <%- include('../components/harvest_date_picker/edit', { element: variety, action: 'detail' }) %>
+            <div class="field">
+                <label for="product" class="label">Produit :</label>
+                <select name="productId" id="product" class="select" disabled>
+                    <% for (const product of products) { %>
+                        <option value="<%= product.id %>" <% if (product.id === variety.product.id) { %> selected <% } %>><%= product.name %></option>
+                    <% } %>
+                </select>
+            </div>
+            <%- include('../components/btn_form', {domain: 'varieties', element: variety}) %>
+        </form>
+    </main>
+</body>
+</html>

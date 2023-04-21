@@ -27,8 +27,8 @@ CREATE VIEW product_select AS
                             'harvestEndAt', v.harvest_end_at
                         )
                 )
-             FROM variety v
-             WHERE v.product_id = p.id),
+            FROM variety v
+            WHERE v.product_id = p.id),
             '{}'
             ) as "variety"
     FROM "product" p

@@ -1,0 +1,30 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+    <aside>
+        <a href="/admin">Home</a>
+        Catégories
+    </aside>
+    <main class="content">
+        
+        <h1>Création d'une nouvelle parcelle</h1>
+        
+        <form action="<%= actionLink %>" method="post">
+            <div class="field">
+                <label class="label">Nom</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" placeholder="Nom de la parcelle">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

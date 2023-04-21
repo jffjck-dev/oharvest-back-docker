@@ -13,6 +13,7 @@ categoryRouter.get('/create', categoryController.createPage);
 categoryRouter.post('/create', categoryValidate.validateBody, categoryController.createAction);
 
 categoryRouter.param('id', categoryMiddleware.loadCategory);
+categoryRouter.get('/:id(\\d+)/detail', categoryController.detailPage);
 /**
  * Route : /admin/categories/:id/edit
  */

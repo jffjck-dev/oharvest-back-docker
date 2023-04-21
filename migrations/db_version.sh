@@ -7,3 +7,5 @@ sqitch add 6.crud_variety -n "crud function for variety table"sqitch
 sqitch add 7.product_in_plot -n "create link table between product and plot with view and functions"
 sqitch add 8.delete_functions -n "adding functions delete to all tables"
 sqitch add 9.update_view_product -n "Updating view product including varieties associated"
+sqitch add 10.alter_table_product_variety -n "Alter column harvest_begin_at and harvest_end_at to integer for product and variety"
+sqitch add 11.change_product_in_plot_view -n "Change the content of the view product in plot"

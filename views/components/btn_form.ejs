@@ -1,0 +1,11 @@
+<div class="field is-grouped">
+    <div class="control">
+        <%- include('./btn_action', {title: 'Editer', icon: 'mdi-pencil', className: 'is-link'}); %> 
+    </div>
+    <div class="control">
+        <%- include('./btn_link', {link: domain, title: 'Retour', icon: 'mdi-arrow-down-left-bold', className: 'is-link is-light'}); %> 
+    </div>
+    <div class="control">
+        <%- include('./btn_link', {link: `${domain}/${element.id}/delete`, title: 'Supprimer', icon: 'mdi-delete', className: 'is-danger'}); %> 
+    </div>
+</div>

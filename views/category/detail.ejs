@@ -1,0 +1,21 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+    <aside>
+        <a href="/admin">Home</a>
+        Catégories
+    </aside>
+    <main class="content">
+        <h1>Détail de la catégorie</h1>
+        <form action="<%= actionLink %>">
+            <div class="field">
+                <label class="label">Nom</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" placeholder="Nom de la catégorie" value="<%= category.name %>" disabled>
+                </div>
+            </div>
+            <%- include('../components/btn_form', {domain: 'categories', element: category}) %>
+        </form>
+    </main>
+</body>
+</html>

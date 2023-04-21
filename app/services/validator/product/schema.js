@@ -4,9 +4,9 @@ export const productSchema = Joi.object({
     name: Joi.string().required(),
     isAvailable: Joi.boolean().required(),
     image: Joi.string().required(),
-    feature: Joi.string().required(),
-    trick: Joi.string().required(),
-    harvestBeginAt: Joi.date().required(),
-    harvestEndAt: Joi.date().required(),
+    description: Joi.string().required(),
+    tip: Joi.string().required(),
+    harvestBeginAt: Joi.number().integer(),
+    harvestEndAt: Joi.number().integer(),
     categoryId: Joi.number().integer()
 });

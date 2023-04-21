@@ -1,0 +1,35 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+    <aside>
+        <a href="/admin">Home</a>
+        Catégories
+    </aside>
+    <main class="content">
+        <h1>Liste des variétés</h1>
+        <%- include('../components/btn_link', {link: `varieties/create`, title: 'Ajouter une nouvelle variété', icon: 'mdi-new-box', className: 'is-info'}); %>
+        <table class="table">
+            <thead>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <% for(const variety of varieties) { %>
+                <tr>
+                    <th><%= variety.id %></th>
+                    <td><%= variety.name %></td>
+                    <td>
+                        <%- include('../components/btn_link', {link: `varieties/${variety.id}/detail`, title: 'Voir le détail', icon: 'mdi-eye-outline', className: 'is-info'}); %>  
+
+                        <%- include('../components/btn_link', {link: `varieties/${variety.id}/edit`, title: 'Editer', icon: 'mdi-pencil', className: 'is-success'}); %>
+
+                        <%- include('../components/btn_link', {link: `varieties/${variety.id}/delete`, title: 'Supprimer', icon: 'mdi-delete', className: 'is-danger'}); %>  
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

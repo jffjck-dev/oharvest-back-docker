@@ -2,7 +2,8 @@ import Joi from 'joi';
 
 export const varietySchema = Joi.object({ 
     name: Joi.string().required(),
-    harvestBeginAt: Joi.date().required(),
-    harvestEndAt: Joi.date().required(),
+    description: Joi.string().required(),
+    harvestBeginAt: Joi.number().integer(),
+    harvestEndAt: Joi.number().integer(),
     productId: Joi.number().integer()
 });

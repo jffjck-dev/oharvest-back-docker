@@ -23,9 +23,4 @@ apiProductRouter.param('id', productMiddleware.loadProduct);
 apiProductRouter.get('/:id(\\d+)', productController.oneProduct);
 apiProductRouter.put('/:id(\\d+)', productValidate.validateBody, productController.updateProduct);
 
-/**
- * Route : /api/products/available
- */
-apiProductRouter.get('/available', productController.allProductAvailable);
-
 export { apiProductRouter };

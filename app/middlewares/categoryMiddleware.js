@@ -23,6 +23,20 @@ export const categoryMiddleware = {
         } catch(error){
             next(new APIError('Internal server error', 500));
         }       
-    }
+    },
+
+    async loadCategories(request, response, next){
+        try {
+            const categoriesFound = await categoryDataMapper.findAll();
+            if (categoriesFound) {
+                response.locals.categories = categoriesFound;
+                next();
+            } else {
+                next(new APIError('Category not found', 400));
+            }
+        } catch(error){
+            next(new APIError('Internal server error', 500));
+        }       
+    },
 };
 

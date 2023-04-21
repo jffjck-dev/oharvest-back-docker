@@ -1,0 +1,63 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+    <aside>
+        <a href="/admin">Home</a>
+        Produits
+    </aside>
+    <main class="content">
+        <h1>Detail d'un produit</h1>
+        <form action="<%= actionLink %>">
+            <div class="field">
+                <label class="label">Nom</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" placeholder="Nom du produit" value="<%= product.name %>" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Disponibilité</label>
+                <div class="control">
+                    <label class="radio">
+                    <input type="radio" name="isAvailable" value="true" <% if (product.isAvailable === true) { %> checked <% } %> disabled>
+                        Est disponible
+                    </label>
+                    <label class="radio">
+                    <input type="radio" name="isAvailable" value="false" <% if (product.isAvailable === false) { %> checked <% } %> disabled>
+                        Non disponible
+                    </label>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Image</label>
+                <div class="control">
+                    <input class="input" name="image" type="text" placeholder="Image du produit" value="<%= product.image %>" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea" name="description" id="description" cols="30" rows="10" placeholder="Description du produit" value="<%= product.description %>" disabled><%= product.description %></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Astuce</label>
+                <div class="control">
+                    <textarea class="textarea" name="tip" id="tip" cols="30" rows="10" placeholder="Astuce du produit" value="<%= product.tip %>" disabled><%= product.tip %></textarea>
+                </div>
+            </div>
+            <%- include('../components/harvest_date_picker/edit', { element: product, action: 'detail' }) %>
+            <div class="field">
+                <label class="label">Appartient à la catégorie</label>
+                <div class="control">
+                    <select class="select" name="categoryId" id="categoryId" disabled>
+                        <% for (category of categories) { %>
+                            <option value="<%= category.id %>" <% if (product.category.id === category.id) { %> selected <% } %>><%= category.name %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <%- include('../components/btn_form', {domain: 'products', element: product}) %>
+        </form>
+    </main>
+</body>
+</html>
