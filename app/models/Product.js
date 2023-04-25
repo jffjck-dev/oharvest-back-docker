@@ -15,6 +15,15 @@ export class Product extends CoreDataMapper {
 
         return result.rows;
     }
+
+    async updateProductAvailability(product){
+        const query = `SELECT * FROM ${this.tableName}_update($1, $2)`;
+        const values = [product.id, product.isAvailable];
+
+        const result = await this.client.query(query, values);
+
+        return result.rows[0];
+    }
 }
 
 export const productDataMapper = new Product(pool);

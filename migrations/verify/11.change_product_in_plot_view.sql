@@ -2,6 +2,7 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM plot_select;
+SELECT * FROM product_in_plot_select;
 
 ROLLBACK;

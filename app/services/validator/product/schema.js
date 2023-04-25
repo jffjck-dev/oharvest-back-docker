@@ -10,3 +10,8 @@ export const productSchema = Joi.object({
     harvestEndAt: Joi.number().integer(),
     categoryId: Joi.number().integer()
 });
+
+export const updateAvailabilityProductSchema = Joi.object({
+    id: Joi.number().required(),
+    isAvailable: Joi.boolean().required()
+});

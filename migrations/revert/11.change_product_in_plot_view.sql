@@ -14,8 +14,8 @@ SELECT
         )) AS "product",
     pl.id AS "plotId"
 FROM "product_in_plot" p
-         JOIN "product" pr ON p.product_id = pr.id
-         JOIN "plot" pl ON p.plot_id = pl.id
+        JOIN "product" pr ON p.product_id = pr.id
+        JOIN "plot" pl ON p.plot_id = pl.id
 GROUP BY pl.id;
 
 COMMIT;

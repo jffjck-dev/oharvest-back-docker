@@ -1,0 +1,36 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+<%- include('../partials/aside') %>
+    <main class="content">
+        <h1>Liste des réservation</h1>
+        <table class="table">
+            <thead>
+                <th>Id</th>
+                <th>Réservation faite le</th>
+                <th>Date de la visite</th>
+                <th>Créneau horaire</th>
+                <th>Ecole</th>
+                <th>Confirmation de la visite?</th>
+            </thead>
+            <tbody>
+                <% for(const booking of bookings) { %>
+                <tr>
+                    <th><%= booking.id %></th>
+                    <td><%= booking.bookingAt %></td>
+                    <td><%= booking.visitAt %></td>
+                    <td><%= booking.slot %></td>
+                    <td><%= booking.name %></td>
+                    <td><%= booking.isConfirm %></td>
+                    <td>
+                        <%- include('../components/btn_link', {link: `bookings/${booking.id}/detail`, title: 'Voir le détail', icon: 'mdi-eye-outline', className: 'is-info'}); %> 
+
+                        <%- include('../components/btn_link', {link: `bookings/${booking.id}/edit`, title: 'Editer', icon: 'mdi-pencil', className: 'is-success'}); %>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

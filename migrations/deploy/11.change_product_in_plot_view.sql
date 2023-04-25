@@ -16,7 +16,7 @@ CREATE VIEW plot_select AS
         "name",
         ARRAY[
             [start_point_longitude, start_point_latitude],
-            [end_point_longitude, end_point_longitude]
+            [end_point_longitude, end_point_latitude]
         ] as "coordinate"
     FROM "plot";
 
@@ -26,7 +26,7 @@ SELECT
     pl.name,
     ARRAY[
         [pl.start_point_longitude, pl.start_point_latitude],
-        [pl.end_point_longitude, pl.end_point_longitude]
+        [pl.end_point_longitude, pl.end_point_latitude]
     ] as "coordinate",
     COALESCE(
         (

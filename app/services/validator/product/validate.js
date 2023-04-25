@@ -1,4 +1,4 @@
-import { productSchema } from './schema.js';
+import { productSchema, updateAvailabilityProductSchema } from './schema.js';
 import { APIError } from '../../error/APIError.js';
 
 export const productValidate = {
@@ -10,6 +10,16 @@ export const productValidate = {
     * */
     validateBody(request, response, next){
         const { error } = productSchema.validate(request.body);
+
+        if(error) {
+            next(new APIError(error, 400));
+        } else {
+            next();
+        }
+    },
+
+    validateUpdataAvailable(request, response, next){
+        const { error } = updateAvailabilityProductSchema.validate(request.body);
 
         if(error) {
             next(new APIError(error, 400));

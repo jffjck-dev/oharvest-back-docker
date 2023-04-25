@@ -35,27 +35,27 @@ CREATE OR REPLACE FUNCTION category_delete(pp json) RETURNS category AS $$
     FROM category c
     WHERE c.id=(pp->>'id')::int
     RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION plot_delete(pp json) RETURNS plot AS $$
     DELETE  
     FROM plot pl
     WHERE pl.id=(pp->>'id')::int
     RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION product_delete(pp json) RETURNS product AS $$
     DELETE  
     FROM product pr
     WHERE pr.id=(pp->>'id')::int
     RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION variety_delete(pp json) RETURNS variety AS $$
     DELETE  
     FROM variety v
     WHERE v.id=(pp->>'id')::int
     RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 COMMIT;

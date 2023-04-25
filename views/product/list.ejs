@@ -1,10 +1,7 @@
 <%- include('../partials/header'); %>
 
 <body class="container">
-    <aside>
-        <a href="/admin">Home</a>
-        Produits
-    </aside>
+    <%- include('../partials/aside') %>
     <main class="content">
         <h1>Liste des produits</h1>
         <%- include('../components/btn_link', {link: `products/create`, title: 'Ajouter un nouveau produit', icon: 'mdi-new-box', className: 'is-info'}); %>
@@ -18,9 +15,12 @@
             <tbody>
                 <% for(const product of products) { %>
                 <tr>
-                    <th><%= product.id %></th>
+                    <td><%= product.id %></td>
                     <td><%= product.name %></td>
-                    <td><% if(product.isAvailable) { %> Disponible <% } else { %> Non disponible  <% } %></td>
+                    <td>
+                        <input data-product-id="<%= product.id %>" class="switch" name="isAvailable" id="is-available-<%= product.id%>" type="checkbox" <% if(product.isAvailable) { %> checked <% } %>>
+                        <label for="is-available-<%= product.id%>"><% if(product.isAvailable) { %> Disponible <% } else { %> Non disponible  <% } %></label>
+                    </td>
                     <td>
                         <%- include('../components/btn_link', {link: `products/${product.id}/detail`, title: 'Voir le détail', icon: 'mdi-eye-outline', className: 'is-info'}); %> 
 
@@ -34,5 +34,6 @@
             </tbody>
         </table>
     </main>
+    <script src="/js/checkAvailability.js"></script>
 </body>
 </html>

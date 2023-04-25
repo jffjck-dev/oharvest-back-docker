@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION category_insert(c json) RETURNS category AS $$
 	VALUES (
         c->>'name'
     ) RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION category_update(c json) RETURNS category AS $$
     UPDATE category
@@ -16,6 +16,6 @@ CREATE OR REPLACE FUNCTION category_update(c json) RETURNS category AS $$
         name=c->>'name'
         WHERE id=(c->>'id')::int
         RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 COMMIT;

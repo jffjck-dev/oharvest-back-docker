@@ -19,6 +19,6 @@ SELECT
             'name', c.name
         )) AS "category"
 FROM "product" p
-         JOIN category c ON c.id = p.category_id;
+        JOIN category c ON c.id = p.category_id;
 
 COMMIT;

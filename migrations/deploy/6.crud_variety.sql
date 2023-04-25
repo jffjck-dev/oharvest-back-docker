@@ -11,7 +11,7 @@ CREATE OR REPLACE FUNCTION variety_insert(v json) RETURNS variety AS $$
         (v->>'harvestEndAt')::date,
         (v->>'productId')::int
     ) RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION variety_update(v json) RETURNS variety AS $$
     UPDATE variety
@@ -22,6 +22,6 @@ CREATE OR REPLACE FUNCTION variety_update(v json) RETURNS variety AS $$
         product_id=(v->>'productId')::int
         WHERE id=(v->>'id')::int
         RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 COMMIT;

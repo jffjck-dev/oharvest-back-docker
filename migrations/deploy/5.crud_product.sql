@@ -15,7 +15,7 @@ CREATE OR REPLACE FUNCTION product_insert(p json) RETURNS product AS $$
         (p->>'harvestEndAt')::date,
         (p->>'categoryId')::int
     ) RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION product_update(p json) RETURNS product AS $$
     UPDATE product
@@ -30,6 +30,6 @@ CREATE OR REPLACE FUNCTION product_update(p json) RETURNS product AS $$
         category_id=(p->>'categoryId')::int
         WHERE id=(p->>'id')::int
         RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 COMMIT;

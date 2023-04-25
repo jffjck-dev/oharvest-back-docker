@@ -20,7 +20,7 @@ export const productController = {
     },
 
     /**
-     * Return a json response with one produc present in the database.
+     * Return a json response with one product present in the database.
      * @param {Request} request 
      * @param {Response} response 
      */

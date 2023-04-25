@@ -6,10 +6,11 @@ const baseUrl = '/admin/products';
 const viewDirectory = 'product';
 
 /**
-     * Syntaxe pour utiliser __dirname dans le cadre de ES6
-     */
+ * Syntaxe pour utiliser __dirname dans le cadre de ES6
+ */
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { productInPlotDataMapper } from '../../models/ProductInPlot.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -78,4 +79,24 @@ export const productController = {
             next(new APIError('Internal server error', 500));
         }
     },
+
+    editAvailableAction: async function(request, response, next){
+        try {
+            const id = parseInt(request.body.id);
+
+            const updatedProduct = await productDataMapper.updateProductAvailability(request.body);
+
+            const productInPlotUpdated = !request.body.isAvailable
+                ? await productInPlotDataMapper.delete(id)
+                : true;
+
+            if(updatedProduct && productInPlotUpdated){
+                response.status(200).json(updatedProduct);
+            }
+
+        } catch (error){
+            console.log(error);
+            next(new APIError('Internal server error', 500));
+        }
+    }
 };

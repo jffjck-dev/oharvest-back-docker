@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION plot_insert(p json) RETURNS plot AS $$
 	VALUES (
         p->>'name'
     ) RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION plot_update(p json) RETURNS plot AS $$
     UPDATE plot
@@ -16,6 +16,6 @@ CREATE OR REPLACE FUNCTION plot_update(p json) RETURNS plot AS $$
         name=p->>'name'
         WHERE id=(p->>'id')::int
         RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 COMMIT;

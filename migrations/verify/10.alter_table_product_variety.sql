@@ -2,6 +2,11 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM product_select;
+SELECT * FROM variety_select;
+SELECT * FROM product_insert;
+SELECT * FROM product_update;
+SELECT * FROM variety_insert;
+SELECT * FROM variety_update;
 
 ROLLBACK;

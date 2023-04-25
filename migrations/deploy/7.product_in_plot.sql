@@ -28,13 +28,13 @@ CREATE OR REPLACE FUNCTION product_in_plot_insert(pp json) RETURNS product_in_pl
         (pp->>'productId')::int,
         (pp->>'plotId')::int
     ) RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 CREATE OR REPLACE FUNCTION product_in_plot_delete(pp json) RETURNS product_in_plot AS $$
     DELETE  
     FROM product_in_plot p
     WHERE p.product_id=(pp->>'productId')::int AND p.plot_id=(pp->>'plotId')::int
     RETURNING *;
-$$ LANGUAGE SQL;
+$$ LANGUAGE SQL SECURITY DEFINER;
 
 COMMIT;

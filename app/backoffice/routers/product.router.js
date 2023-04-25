@@ -28,4 +28,9 @@ productRouter.post('/:id(\\d+)/edit', upload.single('image'), uploadMiddleware.i
  */
 productRouter.get('/:id(\\d+)/delete', productController.deleteAction);
 
+/**
+ * Route : /admin/products/available
+ */
+productRouter.post('/available', productValidate.validateUpdataAvailable, productController.editAvailableAction);
+
 export { productRouter };

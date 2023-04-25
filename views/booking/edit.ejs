@@ -1,0 +1,120 @@
+<%- include('../partials/header'); %>
+
+<body class="container">
+<%- include('../partials/aside') %>
+    <main class="content">
+        <h1>Detail d'une réservation</h1>
+        <form action="<%= actionLink %>" method="post">
+            <div class="field">
+                <label class="label">Réservation faite le</label>
+                <div class="control">
+                    <input class="input" name="bookingAt" type="text" placeholder="Réservation faite le" value="<%= booking.bookingAt %>" disabled>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Date de la visite</label>
+                <div class="control">
+                    <input class="input" name="visitAt" type="text" placeholder="Date de la visite" value="<%= booking.visitAt %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Créneau horaire</label>
+                <div class="control">
+                    <label class="radio">
+                    <input type="radio" name="slot" value="morning" <% if (booking.slot === 'morning') { %> checked <% } %> >
+                        Matinée
+                    </label>
+                    <label class="radio">
+                    <input type="radio" name="slot" value="afternoon" <% if (booking.slot === 'afternoon') { %> checked <% } %> >
+                        Après-midi
+                    </label>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Ecole</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" placeholder="Nom de l'école" value="<%= booking.name %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Contact</label>
+                <div class="control">
+                    <input class="input" name="contact" type="text" placeholder="Personne à contacter" value="<%= booking.contact %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Téléphone</label>
+                <div class="control">
+                    <input class="input" name="phone" type="text" placeholder="Téléphone" value="<%= booking.phone %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" name="mail" type="text" placeholder="Email" value="<%= booking.mail %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Adresse</label>
+                <div class="control">
+                    <input class="input" name="address" type="text" placeholder="Adresse" value="<%= booking.address %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Ville</label>
+                <div class="control">
+                    <input class="input" name="city" type="text" placeholder="Ville" value="<%= booking.city %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Code postal</label>
+                <div class="control">
+                    <input class="input" name="zipcode" type="text" placeholder="Code postal" value="<%= booking.zipcode %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Nombre d'élèves</label>
+                <div class="control">
+                    <input class="input" name="studentNumber" type="text" placeholder="Nombre d'élèves" value="<%= booking.studentNumber %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Nombre de groupes</label>
+                <div class="control">
+                    <input class="input" name="groupNumber" type="text" placeholder="Nombre de groupes" value="<%= booking.groupNumber %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Nombre d'accompagnants</label>
+                <div class="control">
+                    <input class="input" name="guideNumber" type="text" placeholder="Nombre d'accompagnants" value="<%= booking.guideNumber %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Moyen de transport</label>
+                <div class="control">
+                    <input class="input" name="transport" type="text" placeholder="Moyen de transport" value="<%= booking.transport %>">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Confirmation de la visite?</label>
+                <div class="control">
+                    <select class="select" name="isConfirm" id="is-confirm">
+                        <option value="null" <% if (booking.isConfirm === 'null') { %> selected <% } %>>En attente</option>
+                        <option value="true" <% if (booking.isConfirm === 'true') { %> selected <% } %>>Confirmée</option>
+                        <option value="false" <% if (booking.isConfirm === 'false') { %> selected <% } %>>Annulée</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

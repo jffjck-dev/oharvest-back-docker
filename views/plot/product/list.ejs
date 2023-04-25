@@ -1,10 +1,7 @@
 <%- include('../../partials/header'); %>
 
 <body class="container">
-<aside>
-    <a href="/admin">Home</a>
-    Produits
-</aside>
+<%- include('../../partials/aside') %>
 <main class="content">
     <h1>Plan de la cueillette</h1>
     <table>
@@ -41,7 +38,7 @@
         </tbody>
     </table>
 </main>
-<section class="modal">
+<section class="modal" id="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">

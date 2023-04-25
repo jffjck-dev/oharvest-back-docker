@@ -13,9 +13,65 @@ tags:
     description: Route related to the plot
   - name: variety
     description: Route related to the variety
+  - name: booking
+    description: Route related to the booking
 
 components:
   schemas:
+    Booking:
+      title: Booking
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        bookingAt:
+          type: string
+          format: date
+          example: 2023-02-01
+        visitAt:
+          type: string
+          format: date
+          example: 2023-02-02
+        slot:
+          type: string
+          enum: 
+            - Morning 
+            - Afternoon
+          example: Morning
+        name:
+          type: string
+          example: Ecole Lambda
+        contact:
+          type: string
+          example: John Doe
+        phone:
+          type: string
+          example: 06.06.06.06.06
+        mail:
+          type: string
+          example: ecole.lambda@oclock.io
+        address:
+          type: string
+          example: 01 rue de la Joi
+        city:
+          type: string
+          example: Nothere
+        zipcode:
+          type: string
+          example: 01000
+        studentNumber:
+          type: number
+          example: 50
+        groupNumber:
+          type: number
+          example: 2
+        guideNumber:
+          type: number
+          example: 4
+        transport:
+          type: string
+          example: Bus
     Category:
       title: Category
       type: object
@@ -36,12 +92,20 @@ components:
         name:
           type: string
           example: Parcelle 1
+        coordinates:
+          type: array
+          items:
+              type: number
+          example: 
+            - [ 30.999999, -160.666666]
+            - [ -30.999999, 160.666666]
+
     Product:
       title: Product
       type: object
       properties:
         id:
-          type: number
+          type: integer
           example: 1
         name:
           type: string
@@ -60,25 +124,41 @@ components:
           example: Loremp ipsum
         harvestBeginAt:
           type: int
+          minimum: 1
+          maximum: 12
           example: 1
         harvestEndAt:
           type: int
+          minimum: 1
+          maximum: 12
           example: 12
         category:
           $ref: '#/components/schemas/Category'
         variety:
           $ref: '#/components/schemas/Variety'
+
     ProductInPlot:
       title: Product in plot
       type: object
       properties:
-        plotId:
+        id:
           type: number
           example: 1
+        name:
+          type: string
+          example: Loremp ipsum
+        coordinates:
+          type: array
+          items:
+              type: number
+          example: 
+            - [ 30.999999, -160.666666]
+            - [ -30.999999, 160.666666]
         products:
           type: array
           items: 
             $ref: '#/components/schemas/Product'
+
     Variety:
       title: Variety
       type: object
@@ -89,14 +169,285 @@ components:
         name:
           type: string
           example: Jonagored
+        description:
+          type: string
+          example: Loremp ipsum
         harvestBeginAt:
           type: int
+          minimum: 1
+          maximum: 12
           example: 1
         harvestEndAt:
           type: int
+          minimum: 1
+          maximum: 12
           example: 12
 
 paths:
+  /api/bookings:
+    get:
+      description: Return a list with all bookings
+      tags:
+        - booking
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Booking'
+              example:
+                - id: 1
+                  bookingAt: 2023-02-01
+                  visitAt: 2023-02-02
+                  slot: Morning
+                  name: Ecole Lambda
+                  contact: John Doe
+                  phone: 06.06.06.06.06
+                  mail: ecole.lambda@oclock.io
+                  address: 01 rue de la Joi
+                  city: Nothere
+                  zipcode: 01000
+                  studentNumber: 20
+                  groupNumber: 1
+                  guideNumber: 1
+                  transport: Bus 
+                - id: 2
+                  bookingAt: 2023-02-01
+                  visitAt: 2023-02-02
+                  slot: Afternoon
+                  name: Ecole Lambda
+                  contact: John Doe
+                  phone: 06.06.06.06.06
+                  mail: ecole.lambda@oclock.io
+                  address: 01 rue de la Joi
+                  city: Nothere
+                  zipcode: 01000
+                  studentNumber: 50
+                  groupNumber: 3
+                  guideNumber: 6
+                  transport: Voiture 
+    post:
+      description: Return one booking
+      tags:
+        - booking
+      requestBody:
+        description: Return one booking
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - visitAt
+                - slot
+                - name
+                - contact
+                - phone
+                - mail
+                - address
+                - city
+                - zipcode
+                - studentNumber
+                - groupNumber
+                - guideNumber
+                - transport
+              properties:
+                visitAt:
+                  type: string
+                  format: date
+                  example: 2023-02-02
+                slot:
+                  type: string
+                  enum: 
+                    - Morning 
+                    - Afternoon
+                  example: Morning
+                name:
+                  type: string
+                  example: Ecole Lambda
+                contact:
+                  type: string
+                  example: John Doe
+                phone:
+                  type: string
+                  example: 06.06.06.06.06
+                mail:
+                  type: string
+                  example: ecole.lambda@oclock.io
+                address:
+                  type: string
+                  example: 01 rue de la Joi
+                city:
+                  type: string
+                  example: Nothere
+                zipcode:
+                  type: string
+                  example: 01000
+                studentNumber:
+                  type: number
+                  example: 50
+                groupNumber:
+                  type: number
+                  example: 2
+                guideNumber:
+                  type: number
+                  example: 4
+                transport:
+                  type: string
+                  example: Bus
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Booking'
+              example:
+                id: 1
+                bookingAt: 2023-02-01
+                visitAt: 2023-02-02
+                slot: Morning
+                name: Ecole Lambda
+                contact: John Doe
+                phone: 06.06.06.06.06
+                mail: ecole.lambda@oclock.io
+                address: 01 rue de la Joi
+                city: Nothere
+                zipcode: 01000
+                studentNumber: 20
+                groupNumber: 1
+                guideNumber: 1
+                transport: Bus 
+
+  /api/bookings/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: ID of a booking
+        required: true
+        schema:
+          type: integer
+    get:
+      description: Return one booking
+      tags:
+        - booking
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Booking'
+              example:
+                id: 1
+                bookingAt: 2023-02-01
+                visitAt: 2023-02-02
+                slot: Morning
+                name: Ecole Lambda
+                contact: John Doe
+                phone: 06.06.06.06.06
+                mail: ecole.lambda@oclock.io
+                address: 01 rue de la Joi
+                city: Nothere
+                zipcode: 01000
+                studentNumber: 20
+                groupNumber: 1
+                guideNumber: 1
+                transport: Bus 
+    put:
+      description: Return one booking edited
+      tags:
+        - booking
+      requestBody:
+        description: Return one booking edited
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - visitAt
+                - slot
+                - name
+                - contact
+                - phone
+                - mail
+                - address
+                - city
+                - zipcode
+                - studentNumber
+                - groupNumber
+                - guideNumber
+                - transport
+              properties:
+                visitAt:
+                  type: string
+                  format: date
+                  example: 2023-02-02
+                slot:
+                  type: string
+                  enum: 
+                    - Morning 
+                    - Afternoon
+                  example: Morning
+                name:
+                  type: string
+                  example: Ecole Lambda
+                contact:
+                  type: string
+                  example: John Doe
+                phone:
+                  type: string
+                  example: 06.06.06.06.06
+                mail:
+                  type: string
+                  example: ecole.lambda@oclock.io
+                address:
+                  type: string
+                  example: 01 rue de la Joi
+                city:
+                  type: string
+                  example: Nothere
+                zipcode:
+                  type: string
+                  example: 01000
+                studentNumber:
+                  type: number
+                  example: 50
+                groupNumber:
+                  type: number
+                  example: 2
+                guideNumber:
+                  type: number
+                  example: 4
+                transport:
+                  type: string
+                  example: Bus
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Booking'
+              example:
+                id: 1
+                bookingAt: 2023-02-01
+                visitAt: 2023-02-02
+                slot: Morning
+                name: Ecole Lambda
+                contact: John Doe
+                phone: 06.06.06.06.06
+                mail: ecole.lambda@oclock.io
+                address: 01 rue de la Joi
+                city: Nothere
+                zipcode: 01000
+                studentNumber: 20
+                groupNumber: 1
+                guideNumber: 1
+                transport: Bus 
+
   /api/categories:
     get:
       description: Return a list with all categories
@@ -111,6 +462,11 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Category'
+              example:
+                - id: 1
+                  name: Fruits
+                - id: 2
+                  name: Légumes 
 
   /api/categories/{id}:
     parameters:
@@ -161,6 +517,41 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Product'
+              example: 
+                - id: 1
+                  name: Salade
+                  isAvailable: true
+                  image: 'salade.png'
+                  description: Lorem ipsum
+                  tip: Loremp ipsum
+                  harvestBeginAt: 1
+                  harvestEndAt: 12
+                  category:
+                    id: 1
+                    name: Fruits
+                  variety: []
+                - id: 2
+                  name: Pomme
+                  isAvailable: true
+                  image: 'pomme.png'
+                  description: Lorem ipsum
+                  tip: Loremp ipsum
+                  harvestBeginAt: 1
+                  harvestEndAt: 12
+                  category:
+                    id: 1
+                    name: Fruits
+                  variety:
+                    - id: 1
+                      name: Jonagored
+                      description: Loremp ipsum
+                      harvestBeginAt: 1
+                      harvestEndAt: 2
+                    - id: 2
+                      name: Canada
+                      description: Loremp ipsum
+                      harvestBeginAt: 1
+                      harvestEndAt: 2
 
   /api/products/{id}:
     parameters:
@@ -196,6 +587,18 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Plot'
+              example:
+                - id: 1
+                  name: Loremp ipsum
+                  coordinates:
+                    - [ 30.999999, -160.666666]
+                    - [ -30.999999, 160.666666]
+                - id: 2
+                  name: Loremp ipsum
+                  coordinates:
+                    - [ 30.999999, -160.666666]
+                    - [ -30.999999, 160.666666]
+
   /api/plots/products:
     get:
       description: Return a list with all plots with their associated products
@@ -210,6 +613,27 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/ProductInPlot'
+              example:
+                - id: 1
+                  name: Loremp ipsum
+                  coordinates:
+                    - [ 30.999999, -160.666666]
+                    - [ -30.999999, 160.666666]
+                  product: []
+                - id: 1
+                  name: Loremp ipsum
+                  coordinates:
+                    - [ 30.999999, -160.666666]
+                    - [ -30.999999, 160.666666]
+                  product: 
+                    - id: 1
+                      name: Salade
+                      isAvailable: true
+                      image: 'salade.png'
+                    - id: 2
+                      name: Chou
+                      isAvailable: true
+                      image: 'chou.png'
 
   /api/plots/{id}:
     parameters:
@@ -245,6 +669,18 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Variety'
+              example:
+                - id: 1
+                  name: Jonagored
+                  description: Loremp ipsum
+                  harvestBeginAt: 1
+                  harvestEndAt: 2
+                - id: 2
+                  name: Canada
+                  description: Loremp ipsum
+                  harvestBeginAt: 1
+                  harvestEndAt: 2
+
 
   /api/varieties/{id}:
     parameters:

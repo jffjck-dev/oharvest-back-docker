@@ -1,0 +1,29 @@
+<%- include('../partials/header'); %>
+
+<body class="login">
+    <header>
+        <figure class="image">
+            <img src="images/cueillette.png" alt="cueillette oharvest">
+        </figure>
+    </header>
+    <main>
+        <form class="box" method="post" action="/login">
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" name="mail" type="email">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Mot de passe</label>
+                <div class="control">
+                    <input class="input" name="password" type="password">
+                </div>
+            </div>
+
+            <button class="button is-primary">Se connecter</button>
+        </form>
+    </main>
+</body>
+</html>
