@@ -6,7 +6,7 @@ const viewDirectory = 'booking';
 
 export const bookingController = {
     listPage: async function (request, response) {
-        const bookings = await bookingDataMapper.findAll();
+        const bookings = await bookingDataMapper.findAll('visitAt');
         
         response.render( `${ viewDirectory }/list`, { bookings } );
     },

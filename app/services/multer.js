@@ -1,8 +1,8 @@
 import multer from 'multer';
 
 /**
-     * Syntaxe pour utiliser __dirname dans le cadre de ES6
-     */
+ * Syntaxe pour utiliser __dirname dans le cadre de ES6
+ */
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 

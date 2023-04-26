@@ -5,7 +5,7 @@ export class Booking extends CoreDataMapper {
     tableName = 'booking';
 
     async findAllByDate(){
-        const query = `SELECT "visitAt" FROM ${this.tableName}_select`;
+        const query = `SELECT "visitAt", "slot" FROM ${this.tableName}_select WHERE status != 'refused' AND "visitAt"::date > now()::date ORDER BY "visitAt"`;
 
         const result = await this.client.query(query);
 

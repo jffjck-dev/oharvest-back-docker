@@ -5,4 +5,5 @@ node_modules
 sqitch.conf
 migrations/sqitch.plan
 dev_sqitch_script.sh
-/public/css/main.css
+public/css/main.css
+logs/*

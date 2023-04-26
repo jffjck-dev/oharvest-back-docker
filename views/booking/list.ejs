@@ -21,7 +21,15 @@
                     <td><%= booking.visitAt %></td>
                     <td><%= booking.slot %></td>
                     <td><%= booking.name %></td>
-                    <td><%= booking.isConfirm %></td>
+                    <td>
+                        <% if(booking.status === 'pending') { %>
+                            <span class="tag is-warning">En attente</span>
+                        <% } else if(booking.status === 'accepted') { %> 
+                            <span class="tag is-success">Confirmée</span>
+                        <% } else { %> 
+                            <span class="tag is-danger">Refusée</span>
+                        <% } %>
+                    </td>
                     <td>
                         <%- include('../components/btn_link', {link: `bookings/${booking.id}/detail`, title: 'Voir le détail', icon: 'mdi-eye-outline', className: 'is-info'}); %> 
 

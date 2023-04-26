@@ -40,7 +40,7 @@ const editSchema = Joi.object({
     groupNumber: Joi.number().integer().min(1).max(3), 
     guideNumber: Joi.number().integer(), 
     transport: Joi.string().required(),
-    isConfirm: Joi.boolean()
+    status: Joi.string().valid('pending', 'accepted', 'refused')
 });
 
 export { createSchema, editSchema };

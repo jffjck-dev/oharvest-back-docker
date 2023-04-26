@@ -5,8 +5,8 @@ export class CoreDataMapper{
         this.client = client;
     }
 
-    async findAll(){
-        const query = `SELECT * FROM ${this.tableName}_select ORDER BY id`;
+    async findAll(order='id'){
+        const query = `SELECT * FROM ${this.tableName}_select ORDER BY "${order}"`;
 
         const result = await this.client.query(query);
 

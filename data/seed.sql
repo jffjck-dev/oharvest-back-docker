@@ -79,10 +79,14 @@ VALUES
     ('guillaume.felicite@oharvest.io', '$2b$10$1Zy6wcGdUh3TCjhlgg8JKetQ95vB/rdXZfSzgKeS5Un2smYg21imK', 'Guillaume', 'Felicite');
 
 INSERT INTO
-    booking (booking_at, visit_at, slot, name, contact, phone, mail, address, city, zipcode, student_number, group_number, guide_number, transport, is_confirm)
+    booking (booking_at, visit_at, slot, name, contact, phone, mail, address, city, zipcode, student_number, group_number, guide_number, transport, status)
 VALUES
-    ('2023-04-23', '2023-05-06', 'morning', 'Ecole de la poule', 'cocorico', '0311223344', 'coco.rico@poule.io', '10 rue des oeufs', 'poulailler', '92010', 40, 2, 6, 'car', 'false'),
-    ('2023-04-24','2023-05-01','afternoon','Ecole','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum',null),
-    ('2023-04-24','2023-05-01','morning','Ecole Lambda','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'car',false),
-    ('2023-04-25','2023-05-07','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', null),
-    ('2023-04-24','2023-05-01','afternoon','Ecole','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus',true);
+    ('2023-04-23', '2023-05-06', 'morning', 'Ecole de la poule', 'cocorico', '0311223344', 'coco.rico@poule.io', '10 rue des oeufs', 'poulailler', '92010', 40, 2, 6, 'car', 'refused'),
+    ('2023-04-24','2023-05-01','afternoon','Ecole','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum','pending'),
+    ('2023-04-24','2023-05-01','morning','Ecole Lambda','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'car','refused'),
+    ('2023-04-25','2023-05-07','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'pending'),
+    ('2023-04-25','2023-05-03','morning','Ecole BoB','John','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
+    ('2023-04-25','2023-05-03','afternoon','Ecole no2','Jean','0612345678','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
+    ('2023-04-25','2023-05-07','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
+    ('2023-04-24','2023-05-02','afternoon','Ecole de la poule','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus','accepted'),
+    ('2023-04-24','2023-04-27','afternoon','Ecole de la poule','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus','accepted');

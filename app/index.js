@@ -43,6 +43,6 @@ app.use('/admin', authMiddleware, adminRouter);
 app.use('/docs/api', swaggerRouter);
 
 app.use(errorHandling.notFound);
-// app.use(errorHandling.manage);
+app.use(errorHandling.manage);
 
 export default app;

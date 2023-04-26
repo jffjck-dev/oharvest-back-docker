@@ -8,6 +8,7 @@ const app = {
         const tags = document.querySelectorAll('.tags>a');
         const formModal = document.querySelector('#form-modal');
         const closeModalButton = app.modal.querySelector('.delete');
+        const cancelButton = app.modal.querySelector('[type=reset]');
 
         for ( const tag of tags ) {
             tag.addEventListener('click', app.handleDeleteAction);
@@ -19,6 +20,7 @@ const app = {
 
         formModal.addEventListener('submit', app.handleCreateAction );
         closeModalButton.addEventListener('click', app.handleCloseModal);
+        cancelButton.addEventListener('click', app.handleCloseModal);
 
         fetch('/api/products/available')
             .then(response => response.json())
@@ -61,8 +63,6 @@ const app = {
      */
     handleCloseModal(){
         app.modal.classList.remove('is-active');
-
-        console.dir(app.select.querySelectorAll('option'));
 
         while(app.select.firstChild) {
             app.select.removeChild(app.select.firstChild);

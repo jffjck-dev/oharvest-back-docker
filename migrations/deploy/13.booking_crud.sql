@@ -8,6 +8,8 @@ CREATE DOMAIN visit_at_validator AS DATE CHECK (
 
 CREATE TYPE slot AS ENUM ('morning', 'afternoon');
 
+CREATE TYPE confirm AS ENUM ('pending', 'accepted', 'refused');
+
 CREATE DOMAIN phone_validator AS TEXT CHECK (
     VALUE ~ '^(?:(?:\+|00)33[\s.]{0,3}(?:\(0\)[\s.]{0,3})?|0)[1-9](?:(?:[\s.]?\d{2}){4}|\d{2}(?:[\s.]?\d{3}){2})$'
 );
@@ -36,7 +38,7 @@ CREATE TABLE booking (
     "group_number" INT NOT NULL, 
     "guide_number" INT NOT NULL, 
     "transport" TEXT NOT NULL,
-    "is_confirm" BOOLEAN DEFAULT NULL,
+    "status" confirm DEFAULT 'pending',
     CHECK ("student_number" > 0 AND "student_number" < 51),
     CHECK ("group_number" > 0 AND "group_number" < 4),
     CHECK ("guide_number" >= "group_number")
@@ -59,7 +61,7 @@ CREATE VIEW booking_select AS
         "b"."group_number" as "groupNumber", 
         "b"."guide_number" as "guideNumber", 
         "b"."transport",
-        "b"."is_confirm" as "isConfirm"
+        "b"."status" as "status"
     FROM "booking" b;
 
 CREATE OR REPLACE FUNCTION booking_insert(d json) RETURNS booking AS $$
@@ -99,7 +101,7 @@ CREATE OR REPLACE FUNCTION booking_update(d json) RETURNS booking AS $$
         group_number=(d->>'groupNumber')::int, 
         guide_number=(d->>'guideNumber')::int, 
         transport=d->>'transport',
-        is_confirm=(d->>'isConfirm')::boolean
+        status=(d->>'status')::confirm
         WHERE id=(d->>'id')::int
         RETURNING *;
 $$ LANGUAGE SQL SECURITY DEFINER;
