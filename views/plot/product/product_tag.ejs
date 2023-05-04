@@ -1,0 +1,14 @@
+<td class="table__plot-tag">
+    <div class="field">
+        <% for(const product of entity.products) { %>
+            <div class="tags">
+                <span class="tag-left is-info"><%= product.name ;%></span>
+                <a data-product-id="<%= product.id %>" data-plot-id="<%= entity.id %>" class="tag-right mdi mdi-close is-danger"></a>
+            </div>
+        <% } %>
+        <div class="tags add-tag" data-plot-id="<%= entity.id %>">
+            <span class="tag-left is-success">Ajouter</span>
+            <span class="tag-right mdi mdi-plus is-success-light"></span>
+        </div>
+    </div>
+</td>

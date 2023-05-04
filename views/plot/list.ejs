@@ -5,6 +5,11 @@
     <main class="content">
         <h1>Liste des parcelles</h1>
         <%- include('../components/btn_link', {link: `plots/create`, title: 'Ajouter une nouvelle parcelle', icon: 'mdi-new-box', className: 'is-info'}); %>
+        <% if(locals.event) {%>
+            <div class="message <% if (event.action === 'delete') { %> is-danger <% } else { %> is-success <% } %>">
+                <p class="message-body"><%= event.message %></p>
+            </div>
+        <% } %>
         <table class="table">
             <thead>
                 <th>Id</th>
@@ -13,20 +18,38 @@
             </thead>
             <tbody>
                 <% for(const plot of plots) { %>
-                <tr>
-                    <td><%= plot.id %></td>
-                    <td><%= plot.name %></td>
+                <tr id="plot-<%= plot.name %>">
+                    <td data-id="<%= plot.id %>"><%= plot.id %></td>
+                    <td data-name="<%= plot.name %>"><%= plot.name %></td>
                     <td>
                         <%- include('../components/btn_link', {link: `plots/${plot.id}/detail`, title: 'Voir le détail', icon: 'mdi-eye-outline', className: 'is-info'}); %> 
 
                         <%- include('../components/btn_link', {link: `plots/${plot.id}/edit`, title: 'Editer', icon: 'mdi-pencil', className: 'is-success'}); %>
 
-                        <%- include('../components/btn_link', {link: `plots/${plot.id}/delete`, title: 'Supprimer', icon: 'mdi-delete', className: 'is-danger'}); %>  
+                        <button class="button is-danger" data-link="/admin/plots/<%= plot.id %>/delete">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="mdi mdi-delete"></i>
+                                </span>
+                                <span>Supprimer</span>
+                            </span>
+                        </button>
                     </td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
     </main>
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <p>Voulez-vous vraiment supprimer?</p>
+                <a href="#" class="button is-danger">Supprimer</a>
+                <button class="button is-info">Annuler</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/deleteAction.js"></script>
 </body>
 </html>

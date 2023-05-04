@@ -8,29 +8,32 @@ import { upload } from '../../services/multer.js';
 
 const productRouter = Router();
 
-/**
- * Route : /admin/products
- */
+/** Route : /admin/products */
 productRouter.get('/', productController.listPage);
+
+productRouter.use((request, response, next) => {
+    response.locals.enctype = true;
+    next();
+});
+
+/** Route : /admin/products/create */
 productRouter.get('/create', categoryMiddleware.loadCategories,  productController.createPage);
-productRouter.post('/create', upload.single('image'), uploadMiddleware.insertImageName, productValidate.validateBody,  productController.createAction);
+productRouter.post('/create', categoryMiddleware.loadCategories, upload.single('image'), uploadMiddleware.insertImageName,  productValidate.create,  productController.createAction);
 
+/** Middleware called when the param id is present */
 productRouter.param('id', productMiddleware.loadProduct);
-productRouter.get('/:id(\\d+)/detail', categoryMiddleware.loadCategories, productController.detailPage);
-/**
- * Route : /admin/products/:id/edit
- */
-productRouter.get('/:id(\\d+)/edit', categoryMiddleware.loadCategories, productController.editPage);
-productRouter.post('/:id(\\d+)/edit', upload.single('image'), uploadMiddleware.insertImageName, productValidate.validateBody, productController.editAction);
 
-/**
- * Route : /admin/products/:id/delete
- */
+/** Route : /admin/products/:id/detail */
+productRouter.get('/:id(\\d+)/detail', categoryMiddleware.loadCategories, productController.detailPage);
+
+/** Route : /admin/products/:id/edit */
+productRouter.get('/:id(\\d+)/edit', categoryMiddleware.loadCategories, productController.editPage);
+productRouter.post('/:id(\\d+)/edit', categoryMiddleware.loadCategories, upload.single('image'), uploadMiddleware.insertImageName,  productValidate.edit, productController.editAction);
+
+/** Route : /admin/products/:id/delete */
 productRouter.get('/:id(\\d+)/delete', productController.deleteAction);
 
-/**
- * Route : /admin/products/available
- */
+/** Route : /admin/products/available */
 productRouter.post('/available', productValidate.validateUpdataAvailable, productController.editAvailableAction);
 
 export { productRouter };

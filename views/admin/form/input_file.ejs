@@ -1,0 +1,14 @@
+<div class="form-attribute form-attribute--column">
+    <p class="label"><%= property.name %></p>
+    <label class="drop-container">
+        <span class="drop-title">Déposer votre fichier ici</span>
+        <span>ou</span>
+        <input 
+            id="<%= property.key %>"  
+            name="<%= property.key %>" 
+            type="file" 
+            accept="image/png, image/jpg, image/jpeg"
+            <% if(property.form.disabled || locals.action === 'detail') { %> disabled  <% } %>
+            > 
+    </label>
+</div>

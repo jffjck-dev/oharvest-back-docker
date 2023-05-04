@@ -25,6 +25,15 @@ export const categoryMiddleware = {
         }       
     },
 
+    /**
+    * Load all categories item inside the request object
+    * If the item exist, stock inside request.instance
+    * Otherwise, send an error with status 400.
+    * @param {Request} request 
+    * @param {Response} response 
+    * @param {NextFunction} next
+    * @param {Number} id Id of a category
+    */
     async loadCategories(request, response, next){
         try {
             const categoriesFound = await categoryDataMapper.findAll();

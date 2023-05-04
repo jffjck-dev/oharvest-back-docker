@@ -6,6 +6,13 @@
         <%- include('./btn_link', {link: domain, title: 'Retour', icon: 'mdi-arrow-down-left-bold', className: 'is-link is-light'}); %> 
     </div>
     <div class="control">
-        <%- include('./btn_link', {link: `${domain}/${element.id}/delete`, title: 'Supprimer', icon: 'mdi-delete', className: 'is-danger'}); %> 
+        <button class="button is-danger" data-link="/admin/<%= domain %>/<%= element.id %>/delete">
+            <span class="icon-text">
+                <span class="icon">
+                    <i class="mdi mdi-delete"></i>
+                </span>
+                <span>Supprimer</span>
+            </span>
+        </button> 
     </div>
 </div>

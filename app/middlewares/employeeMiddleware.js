@@ -19,7 +19,8 @@ export const employeeMiddleware = {
                 request.instance = employeeFound;
                 next();
             } else {
-                response.redirect('/login');
+                const error = { message: 'Utilisateur/mot de passe invalide' };
+                response.render('authentification/login', { error });
             }
         } catch(error){
             next(new APIError('Internal server error', 500));

@@ -6,7 +6,12 @@
         
         <h1>Création d'une nouvelle parcelle</h1>
         
-        <form action="<%= actionLink %>" method="post">
+        <form id="formPlot" action="/admin/plots/create" method="post">
+            <% if(locals.error) {%>
+                <div class="message is-danger">
+                    <p class="message-body"><%= error.message %></p>
+                </div>
+            <% } %>
             <div class="field">
                 <label class="label">Nom</label>
                 <div class="control">
@@ -15,10 +20,10 @@
             </div>
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="button is-link">Submit</button>
+                    <button type="submit" class="button is-link">Enregistrer</button>
                 </div>
                 <div class="control">
-                    <button class="button is-link is-light">Cancel</button>
+                    <a href="/admin/plots" class="button is-link is-light">Annuler</a>
                 </div>
             </div>
         </form>

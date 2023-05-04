@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
 const emailValidator =/^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const passwordValidator = /[a-zA-Z0-9.!#$%&’*+\/=?^_`@{|}~-]+/;
+const passwordValidator = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`@~-]+$/;
 
 /**
- * LOGIN
+ * Schema used when the user log in to the backoffice.
 */
 const loginSchema = Joi.object({
     mail:Joi
@@ -12,14 +12,16 @@ const loginSchema = Joi.object({
         .pattern(emailValidator)
         .required()
         .messages({
-            'any.required': 'L\'email doit être renseigné.'
+            'string.empty': 'L\'email doit être renseigné.',
+            'string.pattern.base': `L'email n'est pas au format suivant : exemple@test.com`
         }),
     password:Joi
         .string()
         .pattern(passwordValidator)
         .required()
         .messages({
-            'any.required': 'Le mot de passe doit être renseigné.'
+            'string.empty': 'Le mot de passe doit être renseigné.',
+            'string.pattern.base': 'Le mot de passe doit contenir les caractères suivants : A-Z, a-z, 0-9, .!#$%&’*+/=?^_`@~- '
         }) 
 });
 

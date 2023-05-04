@@ -1,0 +1,17 @@
+<div class="form-attribute form-attribute--column">
+    <label for="<%= property.key %>" class="label"><%= property.name %></label>
+    <div class="control">
+        <% for(const choice of property.form.choices) {%>
+        <label class="radio">
+            <input 
+                type="radio" 
+                name="<%= property.key %>" 
+                value="<%= choice.value%>"
+                <% if (locals.entity && entity[property.key] === choice.value) { %> checked <% } %>
+                <% if(property.form.disabled || locals.action === 'detail') { %> disabled  <% } %>
+                >
+            <%= choice.name%>
+        </label>
+        <% } %>
+    </div>
+</div>

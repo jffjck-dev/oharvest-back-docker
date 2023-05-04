@@ -5,24 +5,24 @@ import { categoryMiddleware } from '../../middlewares/categoryMiddleware.js';
 
 const categoryRouter = Router();
 
-/**
- * Route : /admin/categories
- */
+/** Route : /admin/categories */
 categoryRouter.get('/', categoryController.listPage);
+
+/** Route : /admin/categories/create */
 categoryRouter.get('/create', categoryController.createPage);
-categoryRouter.post('/create', categoryValidate.validateBody, categoryController.createAction);
+categoryRouter.post('/create', categoryValidate.create, categoryController.createAction);
 
+/** Middleware called when the param id is present */
 categoryRouter.param('id', categoryMiddleware.loadCategory);
-categoryRouter.get('/:id(\\d+)/detail', categoryController.detailPage);
-/**
- * Route : /admin/categories/:id/edit
- */
-categoryRouter.get('/:id(\\d+)/edit', categoryController.editPage);
-categoryRouter.post('/:id(\\d+)/edit', categoryValidate.validateBody, categoryController.editAction);
 
-/**
- * Route : /admin/categories/:id/delete
- */
+/** Route : /admin/categories/:id/detail */
+categoryRouter.get('/:id(\\d+)/detail', categoryController.detailPage);
+
+/** Route : /admin/categories/:id/edit */
+categoryRouter.get('/:id(\\d+)/edit', categoryController.editPage);
+categoryRouter.post('/:id(\\d+)/edit', categoryValidate.edit, categoryController.editAction);
+
+/** Route : /admin/categories/:id/delete */
 categoryRouter.get('/:id(\\d+)/delete', categoryController.deleteAction);
 
 export { categoryRouter };

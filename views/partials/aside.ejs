@@ -1,25 +1,21 @@
 <aside class="menu">
-    <p class="menu-label">Général</p>
-    <ul class="menu-list">
-        <li><a href="/admin">Dashboard</a></li>
+    <p class="menu-label menu__label">Général</p>
+    <ul class="menu-list menu__list">
+        <li><a href="/admin" <% if( !locals.section ) {%> class="is-active" <% }%>>Dashboard</a></li>
     </ul>
-    <p class="menu-label">Gestion des produits</p>
-    <ul class="menu-list">
-        <li><a href="/admin/categories">Categories</a></li>
-        <li><a href="/admin/products">Produits</a></li>
-        <li><a href="/admin/varieties">Variétés</a></li>
+    <p class="menu__label">Gestion des produits</p>
+    <ul class="menu__list">
+        <li><a href="/admin/categories" <% if( locals.section === 'categories' ) {%> class="is-active" <% }%>>Catégories</a></li>
+        <li><a href="/admin/products" <% if( locals.section === 'products' ) {%> class="is-active" <% }%>>Produits</a></li>
+        <li><a href="/admin/varieties" <% if( locals.section === 'varieties' ) {%> class="is-active" <% }%>>Variétés</a></li>
     </ul>
-    <p class="menu-label">Gestion des parcelles</p>
-    <ul class="menu-list">
-        <li><a href="/admin/plots">Parcelle</a></li>
-        <li><a href="/admin/plots/products">Plan de la cueillette</a></li>
+    <p class=" menu-label menu__label">Gestion des parcelles</p>
+    <ul class="menu__list">
+        <li><a href="/admin/plots" <% if( locals.section === 'plots' ) {%> class="is-active" <% }%>>Parcelle</a></li>
+        <li><a href="/admin/plots/products" <% if( locals.section === 'map' ) {%> class="is-active" <% }%>>Plan de la cueillette</a></li>
     </ul>
-    <p class="menu-label">Gestion des réservations</p>
-    <ul class="menu-list">
-        <li><a href="/admin/bookings">Réservation</a></li>
-    </ul>
-    <p class="menu-label">Compte</p>
-    <ul class="menu-list">
-        <li><a href="/logout">Se déconnecter</a></li>
+    <p class="menu__label">Gestion des réservations</p>
+    <ul class="menu__list">
+        <li><a href="/admin/bookings" <% if( locals.section === 'bookings' ) {%> class="is-active" <% }%>>Réservation</a></li>
     </ul>
 </aside>

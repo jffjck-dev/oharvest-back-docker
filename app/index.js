@@ -31,13 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /** Route dedicated for the API service */
-app.use('/api', apiRouter);
+app.use('/api', authMiddleware.api, apiRouter);
 
 /** Route dedicated for the login and logout */
 app.use(authRouter);
 
 /** Route dedicated for the back-office service */
-app.use('/admin', authMiddleware, adminRouter);
+app.use('/admin', authMiddleware.back, adminRouter);
 
 /** Route dedicated for the Swagger service */
 app.use('/docs/api', swaggerRouter);

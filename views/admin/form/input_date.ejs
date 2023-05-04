@@ -1,0 +1,13 @@
+<div class="form-attribute form-attribute--column">
+    <label for="<%= property.key %>" class="label"><%= property.name %></label>
+    <input 
+        id="<%= property.key %>" 
+        class="input" 
+        name="<%= property.key %>" 
+        type="date" 
+        <% if(locals.entity){ %> 
+            value="<%= entity[property.key] %>" 
+        <% }%>
+        <% if(property.form.disabled || locals.action === 'detail') { %> disabled  <% } %>
+    >
+</div>

@@ -1,0 +1,9 @@
+<td data-status="<%= entity.status %>">
+    <% if(entity.status === 'pending') { %>
+        <p class="status is-warning is-warning-light">En attente</p>
+    <% } else if(entity.status === 'accepted') { %> 
+        <p class="status is-success is-success-light">Confirmée</p>
+    <% } else { %> 
+        <p class="status is-danger is-danger-light">Refusée</p>
+    <% } %>
+</td>

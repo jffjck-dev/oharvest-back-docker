@@ -1,31 +1,62 @@
-<%- include('./partials/header'); %>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Dahsboard</title>
+</head>
 
 <body class="container">
+    <header class="banner">
+        <div class="banner__left">
+            <figure class="is-logo">
+                <img src="/images/cueillette.png" alt="Logo">
+            </figure>
+            <h1 class="title">O'harvest</h1>
+        </div>
+        <div class="banner__right">
+            <%= locals.user %>
+            <a href="/logout">Se déconnecter</a>
+        </div>
+    </header>
     <%- include('./partials/aside')%>
-    <main class="content">
-        <div class="card">
-            <h2 class="card__title">Consulter les produits</h2>
-            <%- include('./components/btn_link', {link: 'products', title: 'Voir la liste des produits', icon: 'mdi-eye-outline'}); %>
+    <main class="main">
+        <div class="level main__header">
+            <div class="level-left">
+                <h1 class="title">Bienvenue sur le dashboard !</h1>
+            </div>
         </div>
-        <div class="card">
-            <h2 class="card__title">Consulter les catégories</h2>
-            <%- include('./components/btn_link', {link: 'categories', title: 'Voir la liste des catégories', icon: 'mdi-eye-outline'}); %>
-        </div>
-        <div class="card">
-            <h2 class="card__title">Consulter les parcelles</h2>
-            <%- include('./components/btn_link', {link: 'plots', title: 'Voir la liste des parcelles', icon: 'mdi-eye-outline'}); %>
-        </div>
-        <div class="card">
-            <h2 class="card__title">Consulter les variétés</h2>
-            <%- include('./components/btn_link', {link: 'varieties', title: 'Voir la liste des variétés', icon: 'mdi-eye-outline'}); %>
-        </div>
-        <div class="card">
-            <h2 class="card__title">Consulter les variétés</h2>
-            <%- include('./components/btn_link', {link: 'plots/products', title: 'Voir les parcelles avec les produits', icon: 'mdi-eye-outline'}); %>
-        </div>
-        <div class="card">
-            <h2 class="card__title">Consulter les réservations</h2>
-            <%- include('./components/btn_link', {link: 'bookings', title: 'Voir les réservations', icon: 'mdi-eye-outline'}); %>
+        <div class="block">
+            <h2 class="block__title">Liste des réservations en attente :</h2>
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <th>Date de la réservation</th>
+                        <th>Date de la visite</th>
+                        <th>Créneau</th>
+                        <th>Ecole</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% for(const booking of bookings) { %>
+                    <tr data-booking-id="<%= booking.id %>">
+                        <td><%= booking.bookingAt %></td>
+                        <td><%= booking.visitAt %></td>
+                        <%- include('booking/slot', { entity: booking }) %>
+                        <td><%= booking.name %></td>
+                        <%- include('booking/status', { entity: booking }) %>
+                        <td class="table__action">
+                            <%- include('components/btn_link', {link: `bookings/${booking.id}/edit`, title: 'Editer', icon: 'mdi-pencil', className: 'is-success'}); %>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
         </div>
     </main>
 </body>

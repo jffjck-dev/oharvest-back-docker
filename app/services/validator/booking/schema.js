@@ -27,7 +27,7 @@ const createSchema = Joi.object({
  * Validation schema for edit
  */
 const editSchema = Joi.object({
-    visitAt: Joi.date().required(),
+    // visitAt: Joi.date().required(),
     slot: Joi.string().required(),
     name: Joi.string().required(), 
     contact: Joi.string().required(), 

@@ -1,0 +1,20 @@
+.block{
+  background-color: #ffffff;
+  box-shadow: 1px 5px 10px 2px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border-color: hsl(204, 71%, 15%);
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  
+  &.is-modal{
+    padding: 0;
+  }
+
+  &__title{
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+  }
+}

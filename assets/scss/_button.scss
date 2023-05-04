@@ -1,0 +1,16 @@
+.button{
+  padding: 0.5rem 1rem;
+  border-width: 1px;
+  border-color: #dbdbdb;
+
+  cursor: pointer;
+
+  background-color: #fff;
+  text-align: center;
+  text-decoration: none;
+
+  & span{
+    font-style: inherit ;
+    font-weight: inherit;
+  }
+}

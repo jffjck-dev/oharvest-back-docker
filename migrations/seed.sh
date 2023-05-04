@@ -1,6 +1,6 @@
 echo "Seeding script launch !"
 echo "-----------------------"
-read -rp 'User to use >> ' dbuser
+read -rp 'User to use >> ' db_user
 read -rp 'Database to use >> ' database
 
-psql -U "$dbuser" -d "$database" -f ./data/seed.sql
+psql -U "$db_user" -d "$database" -f ./data/seed.sql

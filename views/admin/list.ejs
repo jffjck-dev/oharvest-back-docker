@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title><%= title %></title>
+</head>
+
+<body class="container">
+<header class="banner">
+    <div class="banner__left">
+        <figure class="is-logo">
+            <img src="/images/cueillette.png" alt="Logo">
+        </figure>
+        <h1 class="title">O'harvest</h1>
+    </div>
+    <div class="banner__right">
+        <%= locals.user %>
+        <a href="/logout">Se déconnecter</a>
+    </div>
+</header>
+<%- include('../partials/aside') %>
+<main class="main">
+    <div class="level main__header">
+        <div class="level-left">
+            <h1 class="title"><%= title %></h1>
+        </div>
+
+        <% if(!locals.hideCreateAction) { %>
+            <div class="level-right">
+                <%- include('../components/btn_link', {link: `${locals.section}/create`, title: `Ajouter ${field}`, icon: 'mdi-new-box', className: 'is-new'}); %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="block">
+        <% if(locals.event) { %>
+            <div class="message <% if (locals.event.action === 'delete') { %> is-danger <% } else { %> is-success <% } %>">
+                <p class="message-body"><%= locals.event.message %></p>
+            </div>
+        <% } %>
+        <table class="table is-striped">
+            <thead>
+                <tr>
+                    <% for(const property of properties) { %>
+                        <% if(property.show) { %> <th><%= property.name %></th> <% } %>
+                    <% } %>
+                    <% if(!locals.hideListActions) { %>
+                        <th>Actions</th>
+                    <% } %>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(const entity of entities) { %>
+                <tr data-entity-id="<%= entity.id %>">
+                    <% for(const property of properties) { %>
+                        <% if(property.file){ %>
+                            <%- include(`../${property.file}`, { entity }) %>
+                        <% } else if(property.show) { %>
+                            <td data-entity-<%= property.key %>="<%= entity[property.key] %>"><%= entity[property.key] %></td>
+                        <% } %>
+                    <% } %>
+                    <% if(!locals.hideListActions) { %>
+                        <td class="table__action">
+                            <% if(!locals.hideDetailAction) { %>
+                                <%- include('../components/btn_link', {link: `${locals.section}/${entity.id}/detail`, title: 'Voir le détail', icon: 'mdi-eye-outline', className: 'is-info'}); %>
+                            <% } %>
+                            <% if(!locals.hideEditAction) { %>
+                                <%- include('../components/btn_link', {link: `${locals.section}/${entity.id}/edit`, title: 'Editer', icon: 'mdi-pencil', className: 'is-success'}); %>
+                            <% } %>
+                            
+                            <% if(!locals.hideDeleteAction) { %>
+                                <button class="button is-danger" data-link="/admin/<%= section %>/<%= entity.id %>/delete">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <i class="mdi mdi-delete"></i>
+                                        </span>
+                                        <span>Supprimer</span>
+                                    </span>
+                                </button>
+                            <% } %>
+                            
+                        </td>
+                    <% } %>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+<div class="modal" id="delete-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="block is-modal">
+            <div class="modal-header is-danger">
+                <p>Alerte</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text">
+                    <p>Voulez-vous vraiment supprimer?</p>
+                </div>
+                <div class="modal-actions">
+                    <a href="#" class="button is-danger">Supprimer</a>
+                    <button class="button is-info">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if(locals.modals) {%>
+    <% for(const modal of locals.modals) { %>
+        <%- include(`../${modal}`)%>
+    <% } %>
+<% } %>
+
+<script src="/js/deleteAction.js"></script>
+
+<% if(locals.scripts) { %>
+    <% for(const script of locals.scripts) { %>
+        <script src="<%= script %>" ></script>
+    <% } %>
+<% } %>
+</body>
+</html>

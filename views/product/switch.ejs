@@ -1,0 +1,4 @@
+<td>
+    <input data-product-id="<%= entity.id %>" class="switch" name="isAvailable" id="is-available-<%= entity.id%>" type="checkbox" <% if(entity.isAvailable) { %> checked <% } %>>
+    <label for="is-available-<%= entity.id%>"><% if(entity.isAvailable) { %> Disponible <% } else { %> Non disponible  <% } %></label>
+</td>

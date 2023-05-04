@@ -4,6 +4,10 @@ import pool from '../services/pgClient.js';
 export class ProductInPlot extends CoreDataMapper {
     tableName = 'product_in_plot';
 
+    /**
+     * Query the database to delete a product available on a plot.
+     * @returns {Object} An object of product
+     */
     async delete(entity){
         const query = typeof entity === 'number'
             ? `SELECT * FROM ${this.tableName}_delete($1::int)`

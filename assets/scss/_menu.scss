@@ -1,0 +1,38 @@
+.menu{
+  &__label{
+    font-size: .75rem;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    color: #0000FF;
+
+    &:not(:last-child){
+      margin-bottom: 1rem;
+    }
+
+    &:not(:first-child){
+      margin-top: 1rem ;
+    }
+  }
+
+  &__list{
+    line-height: 1.25;
+
+    & a{
+      display: block;
+      border-radius: 2px;
+      padding: 0.5rem 0.75rem;
+      color: #000000;
+      transition: 250ms ease;
+
+      &:hover{
+        background-color: #e5e5e5;
+        transition: 250ms ease;
+      }
+
+      &.is-active{
+        background-color: hsl(208, 68%, 27%);
+        color: #ffffff;
+      }
+    }
+  }
+}

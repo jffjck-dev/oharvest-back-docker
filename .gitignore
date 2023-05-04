@@ -7,3 +7,4 @@ migrations/sqitch.plan
 dev_sqitch_script.sh
 public/css/main.css
 logs/*
+cypress.js

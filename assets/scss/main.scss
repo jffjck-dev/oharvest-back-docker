@@ -1,3 +1,54 @@
+@use "grid";
+@use "table";
+@use "block";
+@use "modal";
+@use "button";
+@use "color";
+@use "image";
+@use "menu";
+@use "field-product";
+@use "form";
+@use "tag";
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap');
+
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html, iframe, legend, li, ol, p, pre, ul {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  line-height: 1.5;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.button, .file-cta, .file-name, .input, .select select, textarea{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
+  display: inline-flex;
+  font-size: 1rem;
+  border-radius: 4px;
+  vertical-align: top;
+}
+.button, .file-cta, .file-name, .input, .select select{
+  height: 2.5rem;
+}
+
+.file-cta, .file-name, .input, .select select, textarea{
+  border: 1px solid black;
+}
+
+
 @supports(-webkit-appearance: none) or (-moz-appearance: none) {
   input[type='checkbox']{
     --active: #3a7c32;
@@ -111,22 +162,6 @@
   box-sizing: border-box;
 }
 
-.container{
-  max-width: 100vw !important;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 250px auto;
-  grid-template-rows: auto;
-  margin: 0;
-}
-
-.login{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .content{
   padding: 2rem;
   display: flex;
@@ -154,19 +189,11 @@
   }
 }
 
-aside {
-  background-color: lightgreen;
+button.is-danger * {
+  pointer-events: none;
+}
+
+.message{
   padding: 1rem;
-}
-
-.menu-list a {
-  color: #000;
-}
-
-.menu-label {
-  color: #0000FF;
-}
-
-.content table td {
-  vertical-align: middle;
+  margin-bottom: 0.5rem;
 }

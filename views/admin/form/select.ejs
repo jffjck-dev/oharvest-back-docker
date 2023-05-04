@@ -1,0 +1,20 @@
+<div class="form-attribute form-attribute--column">
+    <label for="<%= property.key %>" class="label"><%= property.name %></label>
+    <select name="<%= property.key %>" id="<%= property.key %>" <% if(property.form.disabled || locals.action === 'detail') { %> disabled  <% } %>>
+        <% if(property.form.option){ %> 
+            <% for(const option of locals[property.form.option]) {%>
+                <option 
+                    value="<%= option.id %>" 
+                    <% if (locals.entity && entity[property.form.attribute].id === option.id) { %> selected <% } %>
+                ><%= option.name %></option>
+            <% } %>
+        <% } else { %>
+            <% for(const choice of property.form.choices) {%>
+                <option 
+                    value="<%= choice.value %>" 
+                    <% if (locals.entity && entity[choice.value] === entity[property.key]) { %> selected <% } %>
+                ><%= choice.name %></option>
+            <% } %>
+        <% } %>
+    </select>
+</div>

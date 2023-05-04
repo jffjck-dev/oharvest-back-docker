@@ -1,0 +1,82 @@
+$primary-color: hsl(203, 71%, 15%);
+$secundary-color: hsl(158, 41%, 39%);
+$alternative-color: hsl(208, 68%, 27%);
+
+$background-color: hsl(135, 51%, 69%);
+$background-color-transparent: hsl(204, 71%, 15%);
+$background-color-dark: hsl(315, 11%, 7%);
+$background-light-color: hsl(98, 73%, 86%);
+$background-color-footer-dark: hsla(204, 71%, 15%,100);
+$background-color-footer-light: hsla(98, 73%, 86%, 100%);
+
+$primary-border: 1px solid hsl(204, 71%, 15%);
+
+$color-success-light: hsl(120, 73%, 75%);
+$color-success-dark: hsl(120, 100%, 20%);
+$color-error-light: hsl(0, 79%, 72%);
+$color-error-dark: hsl(0, 100%, 27%);
+
+$calendar-color:hsl(122, 39%, 49%);
+$spring-color:hsla(110, 80%, 39%, 0.986);
+$summer-color:hsl(29, 100%, 50%);
+$automn-color:hsl(27, 93%, 17%);
+
+$shadow-light-tag:hsl(48, 100%, 50%);
+$available-tag-border: hsl(120, 93%, 11%);
+$unvailable-tag-border: hsl(0, 96%, 20%);
+
+$color-grey-light: hsl(0, 0%, 40%);
+$color-grey-dark: hsl(0, 0%, 20%);
+
+.container{
+  max-width: 100vw !important;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 250px auto;
+  grid-template-rows: 75px auto;
+  grid-template-areas:
+    "banner banner"
+    "aside main";
+  margin: 0;
+}
+
+.banner{
+  grid-area: banner;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 10;
+  box-shadow: 0 0 7px 0;
+
+  &__left{
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+  }
+}
+
+aside {
+  grid-area: aside;
+  background-color: $background-color;
+  padding: 2.5rem 1rem;
+  border-right: 1px solid black ;
+}
+
+.main{
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  gap: 1rem 0;
+  background-color: rgba(125, 125, 125, 0.10);
+  box-shadow: 8px 1px 10px 0 rgb(0 0 0 / 15%) inset;
+
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+}
+

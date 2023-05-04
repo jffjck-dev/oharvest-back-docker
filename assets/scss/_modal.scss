@@ -1,0 +1,55 @@
+.modal{
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  z-index: 100;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &.is-active{
+    display: flex;
+  }
+}
+
+.is-modal{
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto ;
+  grid-template-areas:
+      "modal-header"
+      "modal-body";
+  align-items: center;
+  width: 600px;
+
+  & .modal-header{
+    grid-area: modal-header;
+    padding: 0.5rem 1rem;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.4rem;
+    color: #000000;
+  }
+
+  & .modal-body{
+    grid-area: modal-body;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  & .modal-text{
+    grid-area: modal-text;
+  }
+
+  & .modal-actions{
+    grid-area: modal-actions;
+    justify-self: end;
+  }
+}

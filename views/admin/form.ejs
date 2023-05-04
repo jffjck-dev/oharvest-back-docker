@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title><%= title %></title>
+</head>
+
+<body class="container">
+<header class="banner">
+    <div class="banner__left">
+        <figure class="is-logo">
+            <img src="/images/cueillette.png" alt="Logo">
+        </figure>
+        <h1 class="title">O'harvest</h1>
+    </div>
+    <div class="banner__right">
+        <%= locals.user %>
+        <a href="/logout">Se déconnecter</a>
+    </div>
+</header>
+<%- include('../partials/aside') %>
+<main class="main">
+    <div class="level main__header">
+        <div class="level-left">
+            <h1 class="title"><%= title %></h1>
+        </div>
+    </div>
+
+    <div class="block">
+        <form class="form" id="formCategory" <% if(locals.action !== 'detail') { %> action="/admin/<%= section %>/<%= action %>" <% } %> method="post" <% if(locals.enctype) { %> enctype="multipart/form-data" <% } %>>
+            <% if(locals.error) {%>
+                <div class="message is-danger">
+                    <p class="message-body"><%= error.message %></p>
+                </div>
+            <% } %>
+            <div class="form-section">
+            <% for(const property of properties) { %>
+                <% if(property.form) { %>
+                    <%- include(`./form/${property.form.type}`, {property}) %>
+                <% } %>
+            <% } %>
+            </div>
+            <div class="form-buttons">
+                <% if(locals.action === 'detail') { %> 
+                    <a href="/admin/<%= section %>/<%= entity.id %>/edit" class="button is-success">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="mdi mdi-pencil"></i>
+                            </span>
+                            <span>Editer</span>
+                        </span>
+                    </a>
+
+                    <a href="/admin/<%= section %>" class="button is-info">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="mdi mdi-arrow-down-left-bold"></i>
+                            </span>
+                            <span>Retour</span>
+                        </span>
+                    </a>
+                    <% if(!locals.hideDeleteAction) { %> 
+                        <button class="button is-danger" data-link="/admin/<%= section %>/<%= entity.id %>/delete">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="mdi mdi-delete"></i>
+                                </span>
+                                <span>Supprimer</span>
+                            </span>
+                        </button> 
+                    <% } %>
+                <% } else { %>
+                    <button type="submit" class="button is-success">Enregistrer</button>
+                    <a href="/admin/<%= section %>" class="button is-info">Annuler</a>
+                <% } %>
+            </div>
+        </form>
+    </div>
+</main>
+
+<% if(locals.action === 'detail') { %> 
+    <div class="modal" id="delete-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="block is-modal">
+                <div class="modal-header">
+                    <p>Alerte</p>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-text">
+                        <p>Voulez-vous vraiment supprimer?</p>
+                    </div>
+                    <div class="modal-actions">
+                        <a href="#" class="button is-danger">Supprimer</a>
+                        <button class="button is-info">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/deleteAction.js"></script>
+<% } %>
+</body>
+</html>

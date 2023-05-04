@@ -16,6 +16,10 @@ export class Product extends CoreDataMapper {
         return result.rows;
     }
 
+    /**
+     * Query the database to update availability product.
+     * @returns {Object[]} An array of product
+     */
     async updateProductAvailability(product){
         const query = `SELECT * FROM ${this.tableName}_update($1, $2)`;
         const values = [product.id, product.isAvailable];

@@ -1,0 +1,63 @@
+$success-color:hsla(117, 69%, 46%, 1);
+$success-color-light:hsla(117, 69%, 46%, 0.5);
+$info-color: hsla(218, 100%, 63%, 1) ;
+$info-color-light: hsla(218, 100%, 63%, 0.5) ;
+$danger-color: hsla(0, 84%, 62%, 1);
+$danger-color-light: hsla(0, 84%, 62%,0.5);
+$warning-color: hsla(47, 95%, 49%, 1);
+$warning-color-light: hsla(47, 95%, 49%, 0.5);
+$new-color: hsl(187deg 87% 57% / 80%);
+
+.is-info{
+  background-color: $info-color;
+  border-color: transparent ;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.is-success{
+  background-color: $success-color;
+  border-color: transparent ;
+  color: #000000;
+  font-weight: bold;
+
+  &-light{
+    background-color: $success-color-light;
+  }
+}
+
+.is-danger{
+  background-color: $danger-color;
+  border-color: transparent ;
+  color: #000000;
+  font-weight: bold;
+
+  &-light{
+    background-color: $danger-color-light;
+  }
+}
+
+.is-warning{
+  background-color: $warning-color;
+  border-color: transparent ;
+  color: #000000;
+  font-weight: bold;
+
+  &-light{
+    background-color: $warning-color-light;
+  }
+}
+
+.is-new{
+  border-color: transparent ;
+  background-color: $new-color;
+  color: #000000;
+  font-weight: bold;
+}
+
+.is-fantasy{
+  border-color: transparent;
+  background-color: hsl(270deg 71% 50%);
+  color: #ffffff;
+  font-weight: bold;
+}

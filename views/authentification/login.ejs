@@ -1,28 +1,42 @@
-<%- include('../partials/header'); %>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Document</title>
+</head>
 
 <body class="login">
-    <header>
-        <figure class="image">
-            <img src="images/cueillette.png" alt="cueillette oharvest">
-        </figure>
-    </header>
-    <main>
-        <form class="box" method="post" action="/login">
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control">
-                    <input class="input" name="mail" type="email">
+    <main class="block">
+        <div class="card-image">
+            <figure class="image is-1by1">
+                <img src="images/cueillette.png" alt="cueillette oharvest">
+            </figure>
+        </div>
+        <form class="form form-login" method="post" action="/login">
+            <div class="form-section">
+                <% if(locals.error) {%>
+                    <div class="message is-danger">
+                        <p class="message-body "><%= error.message %></p>
+                    </div>
+                <% } %>
+
+                <div class="form-attribute form-attribute--column">
+                    <label for="email" class="label">Email</label>
+                    <input id="email" class="input" name="mail" type="email">
+                </div>
+
+                <div class="form-attribute form-attribute--column">
+                    <label for="password" class="label">Mot de passe</label>
+                    <input id="password" class="input" name="password" type="password">
                 </div>
             </div>
 
-            <div class="field">
-                <label class="label">Mot de passe</label>
-                <div class="control">
-                    <input class="input" name="password" type="password">
-                </div>
+            <div class="form-buttons">
+                <button type="submit" class="button is-fantasy">Se connecter</button>
             </div>
-
-            <button class="button is-primary">Se connecter</button>
         </form>
     </main>
 </body>

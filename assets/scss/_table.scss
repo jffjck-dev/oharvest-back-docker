@@ -1,0 +1,31 @@
+.table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  & thead th{
+    border-width: 0 0 2px;
+    color: #000000;
+    text-align: left;
+  }
+
+  &__action{
+    width: 1%;
+    white-space: nowrap;   
+  }
+
+  &__plot-tag{
+    width: 80%;
+  }
+
+  & td, & th{
+    vertical-align: middle;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0.5rem 0.75rem;
+    // text-align: center;
+  }
+
+  & tbody tr:not(:last-child){
+    border-bottom: 1px solid #000000 ;
+  }
+}

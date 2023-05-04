@@ -1,5 +1,5 @@
 const app = {
-    modal: document.querySelector('.modal'),
+    modal: document.querySelector('.modal#product-modal'),
     select: document.querySelector('#productId'),
     rows: document.querySelectorAll('[data-row-plot]'),
 
@@ -7,7 +7,6 @@ const app = {
         const addTags = document.querySelectorAll('.add-tag');
         const tags = document.querySelectorAll('.tags>a');
         const formModal = document.querySelector('#form-modal');
-        const closeModalButton = app.modal.querySelector('.delete');
         const cancelButton = app.modal.querySelector('[type=reset]');
 
         for ( const tag of tags ) {
@@ -19,10 +18,13 @@ const app = {
         }
 
         formModal.addEventListener('submit', app.handleCreateAction );
-        closeModalButton.addEventListener('click', app.handleCloseModal);
         cancelButton.addEventListener('click', app.handleCloseModal);
 
-        fetch('/api/products/available')
+        fetch('/api/products/available', {
+            headers: {
+                'Authorization': ']Fw[ZS9+PEIzT|uX:;&x5b:q@P!2h'
+            }
+        })
             .then(response => response.json())
             .then((data) => {
                 app.productAvailable = [...data];
@@ -36,7 +38,7 @@ const app = {
     handleOpenModal(event){
         app.modal.classList.add('is-active');
 
-        const row = document.querySelector(`[data-row-plot="${event.target.dataset.plotId}"]`).querySelectorAll('a');
+        const row = document.querySelector(`[data-entity-id="${event.target.dataset.plotId}"]`).querySelectorAll('a');
 
         const map = [];
 
@@ -89,7 +91,7 @@ const app = {
             .then((data) => {
                 const productFound = app.productAvailable.find(product => product.id === data.product_id);
 
-                const row = document.querySelector(`[data-row-plot="${data.plot_id}"]`).querySelector('.field');
+                const row = document.querySelector(`[data-entity-id="${data.plot_id}"]`).querySelector('.field');
 
                 const product = app.createTag(productFound, data.plot_id);
                 row.prepend(product);
@@ -117,7 +119,7 @@ const app = {
         })
             .then((response) => response.json())
             .then(() => {
-                const control = event.target.parentNode.parentNode;
+                const control = event.target.parentNode;
                 control.remove();
             });
     },
@@ -129,28 +131,23 @@ const app = {
      * @returns {HTMLDivElement}
      */
     createTag(data, plotId){
-        const parent = document.createElement('div');
-        parent.classList.add('control');
-
         const block = document.createElement('div');
-        block.classList.add('tags', 'has-addons');
+        block.classList.add('tags');
 
         const content = document.createElement('span');
-        content.classList.add('tag', 'is-info', 'is-medium');
+        content.classList.add('tag-left', 'is-info');
         content.textContent = data.name;
 
         const link = document.createElement('a');
-        link.classList.add('tag', 'is-delete', 'is-danger', 'is-light', 'is-medium');
+        link.classList.add('tag-right', 'mdi', 'mdi-close', 'is-danger');
         link.dataset.productId = data.id;
         link.dataset.plotId = plotId;
         link.addEventListener('click', app.handleDeleteAction);
 
-        block.appendChild(content);
-        block.appendChild(link);
+        block.append(content);
+        block.append(link);
 
-        parent.appendChild(block);
-
-        return parent;
+        return block;
     }
 };
 
