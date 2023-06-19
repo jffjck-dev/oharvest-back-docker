@@ -22,7 +22,9 @@ You need to configure the .env file.
 
 Duplicate the file `.env.example` with a new name `.env`. Give all variables the correct values. 
 
-All are mandatory except ENVIRONMENT. If it is empty, the application will launch in prod environment. The only value accepted is `dev`.
+All are mandatory except ENVIRONMENT. Don't touch the DBHOST value. It must be equal to the service name where the database is launch by docker.
+
+If it is empty, the application will launch in prod environment. The only value accepted is `dev`.
 
 ### Launch the app
 
@@ -38,12 +40,10 @@ The database will start before the node application.
 
 The project use sqitch for versioning the database. Assure you have the following scripts :
 
-- sqitch.sh
+- sqitch.sh 
 - docker_sqitch_script.sh
 
-The first one doesn't need to be modified. 
-
-The second one add more interaction and require the `sqitch.sh` script. It will require some information depend on your configuration. 
+The second add interaction and require the `sqitch.sh` script. It will require some information depend on your configuration. 
 
 For the development environment, it is recommended to copy the second script, uncomment the following variables (line 43, 45 and 47) and assign them a value. Don't forget to add this script inside the `.gitignore`.
 
@@ -64,7 +64,7 @@ engine=pg
 port=5432
 ```
 
-For setting up the database, run the command (replace `dev_docker_sqitch_script.sh` by the dev script if necessary) : 
+For setting up the database, run the command (replace `docker_sqitch_script.sh` by the dev script if necessary) : 
 
 ```bash
 bash docker_sqitch_script.sh -i && bash docker_sqitch_script.sh -d && bash migrations/seed.sh
