@@ -2,9 +2,15 @@ node_modules
 .env
 .idea
 .vscode
+
+#Sqitch file to ignore
 sqitch.conf
 migrations/sqitch.plan
 dev_sqitch_script.sh
+dev_docker_sqitch_script.sh
+
+
 public/css/main.css
 logs/*
 cypress.js
+server_nginx.conf

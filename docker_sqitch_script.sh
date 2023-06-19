@@ -38,6 +38,9 @@ migration_folder=migrations
 # The script name for versioning
 version_file_name=db_version
 
+# Specify the host where the database is stored
+docker_host=localhost
+
 # Use this variable for development environment to avoid the prompt or comment them if you don't need them
 # Design the user of the sql server who own the database of the project
 # db_user=
@@ -46,9 +49,10 @@ version_file_name=db_version
 # The password of the sql user
 # db_password=
 
-#Allow you to configure which database engine you want to use for your project.
+#Allow you to configure which database engine and port you want to use for your project.
 #Uncomment the one needed
 engine=pg
+port=5432
 #engine=mysql
 # -------------------------------------------------------------------------------#
 # Variable to modify                                                             #
@@ -85,36 +89,18 @@ function help_message {
 }
 
 # Function which has several actions :
-# - drop (if exist) the database and the user provided at the beginning of the script before creating them.
 # - create a versioning script mandatory for the use of this script or execute it if it exist
 # - delete sqitch.conf and sqitch.plan if exist and create them with new setup
 function command_sqitch_init {
-    echo "Answer all input to create the administrator and the database :"
-    read -rp "The main administrator to connect who create the following user and database >> " admin
-
-    if [ -z ${db_user+x} ]; then
-        read -rp 'User who will be the admin of the future database >> ' db_user
-    fi
-
     if [ -z ${database+x} ]; then
         read -rp 'Database used for this project >> ' database
     fi
-
-    dropdb "$database" --if-exists -U "$admin"
-    echo "Database $database deleted !"
-    dropuser "$db_user" --if-exists -U "$admin"
-    echo "User $db_user deleted !"
-
-    createuser "$db_user" -P -U "$admin"
-    echo "User $db_user created !"
-    createdb "$database" -O "$db_user" -U "$admin"
-    echo "Database $database created !"
 
     if [ -f sqitch.conf ]; then rm sqitch.conf; fi
     if [ -f $migration_folder/sqitch.plan ]; then rm migrations/sqitch.plan; fi
     echo "File from sqitch deleted !"
 
-    sqitch init --engine "$engine" --top-dir "$migration_folder" "$database" --target db:"$engine":"$database"
+    bash "$SCRIPT_DIR"/sqitch.sh init --engine "$engine" --top-dir "$migration_folder" "$database" --target db:"$engine"://"$docker_host":"$port"/"$database"
     echo "Sqitch initialized !"
 
     if [ -f "$migration_folder"/"$version_file_name".sh ]; then
@@ -147,7 +133,7 @@ function command_sqitch_add {
 
     if [ -f "$migration_folder"/"$version_file_name".sh ]; then
         file_created="$nb_version"."$userfile"
-        sqitch add "$file_created" -n "$usercomment"
+        bash "$SCRIPT_DIR"/sqitch.sh add "$file_created" -n "$usercomment"
         echo sqitch add "$file_created" -n "\"$usercomment\"" >>"$migration_folder"/"$version_file_name".sh
         echo "The version $file_created has been inserted into $migration_folder/$version_file_name"
     else
@@ -177,9 +163,9 @@ function command_sqitch_action {
         export PGPASSWORD=$db_password
 
         if [ "$file" == 'All' ]; then
-            sqitch "$1"
+            bash "$SCRIPT_DIR"/sqitch.sh "$1"
         elif [ "$file" ]; then
-            sqitch "$1" "$file"
+            bash "$SCRIPT_DIR"/sqitch.sh "$1" "$file"
         fi
         break
     done

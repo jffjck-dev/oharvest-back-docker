@@ -7,14 +7,6 @@
  */
 
 export const authMiddleware = {
-    api(request,response, next){
-        const key = request.get('authorization');
-        if(!key || key !== process.env.KEY ){
-            response.status(401).json('Access refused !');
-        } else {
-            next();
-        }
-    },
     back(request, response, next) {
         if ( request.session.user ) {
             next();
