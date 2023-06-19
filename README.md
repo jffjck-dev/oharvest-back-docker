@@ -40,12 +40,14 @@ The database will start before the node application.
 
 The project use sqitch for versioning the database. Assure you have the following scripts :
 
-- sqitch.sh 
+- sqitch
 - docker_sqitch_script.sh
 
-The second add interaction and require the `sqitch.sh` script. It will require some information depend on your configuration. 
+This second script will download the first script, if it is missing, and add interaction to use sqitch. It will require some information depend on your configuration. 
 
-For the development environment, it is recommended to copy the second script, uncomment the following variables (line 43, 45 and 47) and assign them a value. Don't forget to add this script inside the `.gitignore`.
+It is highly recommended to copy the second script in order to store sensible information.
+
+For development environment, you can uncomment the following variables (line 43, 45 and 47) and assign them a value. Don't forget to add this script inside the `.gitignore`.
 
 ```shell
 # Design the user of the sql server who own the database of the project
@@ -56,12 +58,12 @@ For the development environment, it is recommended to copy the second script, un
 #db_password=
 ```
 
-The engine variable design which RDBMS is used and `port` define the port where your docker database listen on the host. 
+The engine variable design which RDBMS is used and `docker_host_port` define the port where your docker database listen on the host. 
 ```shell
 #Allow you to configure which database engine and port you want to use for your project.
 #Uncomment the one needed
 engine=pg
-port=5432
+docker_host_port=5432
 ```
 
 For setting up the database, run the command (replace `docker_sqitch_script.sh` by the dev script if necessary) : 
@@ -72,3 +74,11 @@ bash docker_sqitch_script.sh -i && bash docker_sqitch_script.sh -d && bash migra
 
 When all command finish to execute, the application is ready.
 
+## Reset the application
+
+If you need to reset the database, you need to delete all the container and their associated volumes : 
+
+```bash
+# Delete the container need for the application then delete their volume.
+docker-compose rm && docker volume rm o-harvest-back_db_data && docker volume rm o-harvest-back_node_module
+```

@@ -38,21 +38,26 @@ migration_folder=migrations
 # The script name for versioning
 version_file_name=db_version
 
-# Specify the host where the database is stored
+# The host where the database lives
 docker_host=localhost
+
+# The host port to connect
+docker_port_host=5432
+
+# The name of the script to execute command with docker
+docker_script=sqitch
 
 # Use this variable for development environment to avoid the prompt or comment them if you don't need them
 # Design the user of the sql server who own the database of the project
-# db_user=
+#db_user=
 # Represent the database of the project
-# database=
+#database=
 # The password of the sql user
-# db_password=
+#db_password=
 
-#Allow you to configure which database engine and port you want to use for your project.
+#Allow you to configure which database engine you want to use for your project.
 #Uncomment the one needed
 engine=pg
-port=5432
 #engine=mysql
 # -------------------------------------------------------------------------------#
 # Variable to modify                                                             #
@@ -96,11 +101,11 @@ function command_sqitch_init {
         read -rp 'Database used for this project >> ' database
     fi
 
-    if [ -f sqitch.conf ]; then rm sqitch.conf; fi
-    if [ -f $migration_folder/sqitch.plan ]; then rm migrations/sqitch.plan; fi
-    echo "File from sqitch deleted !"
+    if [ -f sqitch.conf ]; then rm sqitch.conf; echo "sqitch.conf deleted"; fi
+    if [ -f $migration_folder/sqitch.plan ]; then rm migrations/sqitch.plan; echo "sqitch.plan deleted"; fi
+    if [ ! -f "$docker_script" ]; then curl -L https://git.io/JJKCn -o sqitch && chmod +x sqitch; fi
 
-    bash "$SCRIPT_DIR"/sqitch.sh init --engine "$engine" --top-dir "$migration_folder" "$database" --target db:"$engine"://"$docker_host":"$port"/"$database"
+    bash "$SCRIPT_DIR"/"$docker_script" init --engine "$engine" --top-dir "$migration_folder" "$database" --target db:"$engine"://"$docker_host":"$docker_port_host"/"$database"
     echo "Sqitch initialized !"
 
     if [ -f "$migration_folder"/"$version_file_name".sh ]; then
@@ -133,8 +138,8 @@ function command_sqitch_add {
 
     if [ -f "$migration_folder"/"$version_file_name".sh ]; then
         file_created="$nb_version"."$userfile"
-        bash "$SCRIPT_DIR"/sqitch.sh add "$file_created" -n "$usercomment"
-        echo sqitch add "$file_created" -n "\"$usercomment\"" >>"$migration_folder"/"$version_file_name".sh
+        bash "$SCRIPT_DIR"/"$docker_script" add "$file_created" -n "$usercomment"
+        echo bash ./"$docker_script" add "$file_created" -n "\"$usercomment\"" >>"$migration_folder"/"$version_file_name".sh
         echo "The version $file_created has been inserted into $migration_folder/$version_file_name"
     else
         echo "$migration_folder/$version_file_name.sh doesn't exist. Have you run the init option before ?"
@@ -163,9 +168,9 @@ function command_sqitch_action {
         export PGPASSWORD=$db_password
 
         if [ "$file" == 'All' ]; then
-            bash "$SCRIPT_DIR"/sqitch.sh "$1"
+            bash "$SCRIPT_DIR"/"$docker_script" "$1"
         elif [ "$file" ]; then
-            bash "$SCRIPT_DIR"/sqitch.sh "$1" "$file"
+            bash "$SCRIPT_DIR"/"$docker_script" "$1" "$file"
         fi
         break
     done
@@ -232,7 +237,7 @@ select item in "${option_list[@]}"; do
     'verify' | 'revert' | 'deploy')
         command_sqitch_action "$item"
         ;;
-    'quit')
+    'cancel')
         echo 'Operation aborted'
         exit 0
         ;;
@@ -245,5 +250,5 @@ select item in "${option_list[@]}"; do
 done
 
 # -------------------------------------------------------------------------------#
-# Main Script                                                                         #
+# Main Script                                                                    #
 # -------------------------------------------------------------------------------#
