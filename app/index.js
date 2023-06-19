@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /** Route dedicated for the API service */
-app.use('/api', authMiddleware.api, apiRouter);
+app.use('/api', apiRouter);
 
 /** Route dedicated for the login and logout */
 app.use(authRouter);

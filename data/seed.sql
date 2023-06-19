@@ -81,12 +81,12 @@ VALUES
 INSERT INTO
     booking (booking_at, visit_at, slot, name, contact, phone, mail, address, city, zipcode, student_number, group_number, guide_number, transport, status)
 VALUES
-    ('2023-04-23', '2023-05-23', 'morning', 'Ecole de la poule', 'cocorico', '0311223344', 'coco.rico@poule.io', '10 rue des oeufs', 'poulailler', '92010', 40, 2, 6, 'car', 'refused'),
-    ('2023-04-24','2023-05-24','afternoon','Ecole','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum','pending'),
-    ('2023-04-24','2023-05-24','morning','Ecole Lambda','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'car','refused'),
-    ('2023-04-25','2023-05-26','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'pending'),
-    ('2023-04-25','2023-05-29','morning','Ecole BoB','John','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
-    ('2023-04-25','2023-05-29','afternoon','Ecole no2','Jean','0612345678','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
-    ('2023-04-25','2023-05-18','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
-    ('2023-04-24','2023-06-6','afternoon','Ecole de la poule','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus','accepted'),
-    ('2023-04-24','2023-06-2','afternoon','Ecole de la poule','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus','accepted');
+    (now(), now() + interval '2 day', 'morning', 'Ecole de la poule', 'cocorico', '0311223344', 'coco.rico@poule.io', '10 rue des oeufs', 'poulailler', '92010', 40, 2, 6, 'car', 'refused'),
+    (now(), now() + interval '2 day','afternoon','Ecole','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum','pending'),
+    (now(), now() + interval '1 day','morning','Ecole Lambda','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'car','refused'),
+    (now(), now() + interval '4 day','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'pending'),
+    (now(), now() + interval '5 day','morning','Ecole BoB','John','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
+    (now(), now() + interval '5 day','afternoon','Ecole no2','Jean','0612345678','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
+    (now(), now() + interval '9 day','morning','Ecole','Jean','0666886666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',25,2,4,'vroum', 'accepted'),
+    (now(), now() + interval '12 day','afternoon','Ecole de la poule','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus','accepted'),
+    (now(), now() + interval '13 day','afternoon','Ecole de la poule','Jean','0666666666','plop.plop@plop.io','10 rue de la Joi','Nothere','01234',40,3,4,'bus','accepted');

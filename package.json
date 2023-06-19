@@ -10,11 +10,11 @@
     "scss:build": "sass assets/scss:public/css --no-source-map",
     "scss:watch": "sass --watch assets/scss:public/css --no-source-map",
     "db:prod:build": "npm run db:prod:init && npm run db:prod:deploy && npm run db:seed",
-    "db:prod:init": "bash sqitch_script.sh -i",
-    "db:prod:deploy": "bash sqitch_script.sh -d",
+    "db:prod:init": "bash docker_sqitch_script.sh -i",
+    "db:prod:deploy": "bash docker_sqitch_script.sh -d",
     "db:dev:build": "npm run db:dev:init && npm run db:dev:deploy && npm run db:seed",
-    "db:dev:init": "bash dev_sqitch_script.sh -i",
-    "db:dev:deploy": "bash dev_sqitch_script.sh -d",
+    "db:dev:init": "bash dev_docker_sqitch_script.sh -i",
+    "db:dev:deploy": "bash dev_docker_sqitch_script.sh -d",
     "db:seed": "bash migrations/seed.sh",
     "cypress:open": "cypress open"
   },
@@ -24,6 +24,7 @@
   "devDependencies": {
     "cypress": "^12.10.0",
     "eslint": "^8.38.0",
+    "nodemon": "^2.0.22",
     "sass": "^1.62.0"
   },
   "dependencies": {
